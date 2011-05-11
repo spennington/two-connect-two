@@ -72,7 +72,7 @@ public class TwoConnectTwo {
 
 		columnTops = new int[numCols];
 
-		byte[][] board = new byte[numCols + 3][numRows + 3];
+		byte[][] board = new byte[numCols + 6][numRows + 6];
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				byte piece = scanner.next().getBytes()[0];
@@ -157,31 +157,8 @@ public class TwoConnectTwo {
 				getPiece(lastCol + 1, lastRow - 1, board),
 				getPiece(lastCol + 2, lastRow - 2, board),
 				getPiece(lastCol + 3, lastRow - 3, board));
-
-		int blueScore = 0;
-		int redScore = 0;
-		int redMax = 0;
-		int blueMax = 0;
-
-		for (int i = 0; i < scores.length; i++) {
-			if (scores[i] < 0) {
-				blueScore += scores[i];
-				blueMax = Math.min(blueMax, scores[i]);
-			} else if (scores[i] > 0) {
-				redScore += scores[i];
-				redMax = Math.max(redMax, scores[i]);
-			}
-		}
-
-		if ((blueScore & redScore) == 0) {
-			return redMax + blueMax;
-		} else if (redScore > blueScore * -1) {
-			return redMax;
-		} else if (redScore < blueScore * -1) {
-			return blueMax;
-		}
-
-		return 0;
+		
+		return getFinalGameScore(scores);
 	}
 
 	/**
@@ -224,5 +201,32 @@ public class TwoConnectTwo {
 
 	public static int score(byte a, byte b, byte c, byte d) {
 		return scoreMap[(a << 6) | (b << 4) | (c << 2) | d];
+	}
+	
+	public static int getFinalGameScore(int scores[]) {		
+		int blueScore = 0;
+		int redScore = 0;
+		int redMax = 0;
+		int blueMax = 0;
+
+		for (int i = 0; i < scores.length; i++) {
+			if (scores[i] < 0) {
+				blueScore += scores[i];
+				blueMax = Math.min(blueMax, scores[i]);
+			} else if (scores[i] > 0) {
+				redScore += scores[i];
+				redMax = Math.max(redMax, scores[i]);
+			}
+		}
+
+		if (redScore == blueScore * -1 && redScore != 0) {
+			return 1;
+		} else if (redScore > blueScore * -1) {
+			return redMax;
+		} else if (redScore < blueScore * -1) {
+			return blueMax;
+		}
+
+		return 0;
 	}
 }
