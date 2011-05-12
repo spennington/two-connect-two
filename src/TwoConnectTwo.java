@@ -2,22 +2,22 @@ import java.util.Scanner;
 
 public class TwoConnectTwo {
 
-	private static final byte RED_CHAR = (byte) 'r';
-	private static final byte BLUE_CHAR = (byte) 'b';
-	private static final byte GREEN_CHAR = (byte) 'g';
-	private static final byte SPACE_CHAR = (byte) 's';
+	public static final byte RED_CHAR = (byte) 'r';
+	public static final byte BLUE_CHAR = (byte) 'b';
+	public static final byte GREEN_CHAR = (byte) 'g';
+	public static final byte SPACE_CHAR = (byte) 's';
 
 	public static final byte RED = 1;
 	public static final byte BLUE = 2;
 	public static final byte GREEN = 3;
 	public static final byte SPACE = 0;
 
-	private static byte[] charMap = new byte[256];
-	private static byte[] scoreMap = new byte[256];
+	public static byte[] charMap = new byte[256];
+	public static byte[] scoreMap = new byte[256];
 
-	private static int[] columnTops;
+	public static int[] columnTops;
 
-	private static boolean isFull = true;
+	public static boolean isFull = true;
 
 	static {
 		// Map to convert characters to their
