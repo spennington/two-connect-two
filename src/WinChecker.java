@@ -93,10 +93,6 @@ public class WinChecker {
 	}
 	
 	public static int isWin(Board board, final int lastCol) {
-		if (board.isFull()) {
-			return 1;
-		}
-
 		int lastRow = board.getTop(lastCol);
 
 		//used to keep track of the cumulative score
@@ -202,7 +198,7 @@ public class WinChecker {
 		//if winValues contains a win we have a tie.
 		//if winValues contains no wins the maxMap will
 		//give a score of 0 indicating no winner
-		if(total == 0 && winValues != 1 << 5) {
+		if(total == 0 && (winValues != 1 << 5)) {
 			return 1;
 		} else {
 			//Mask winValues so we only consider relevant bits, then look
