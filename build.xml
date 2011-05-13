@@ -1,0 +1,17 @@
+<project name="two-connect-two" basedir="." default="tar">
+    <property name="src" value="src"/>
+    <property name="output" value="bin"/>
+	<property name="groupname" value="twoconnecttwo" />
+	
+	<target name="tar">
+		<tstamp>
+			<format property="NOW" pattern="yyyyMMdd" />
+		</tstamp>
+		<tar destfile="${groupname}${NOW}.tar">
+			<tarfileset dir="${src}" includes="**/*.java" />
+			<tarfileset file="makeinfo" />
+			<tarfileset file="manifest" />
+		</tar>
+		<gzip src="${groupname}${NOW}.tar" destfile="${groupname}${NOW}.tar.gz"/>
+	</target>
+</project>
