@@ -1,17 +1,36 @@
 <project name="two-connect-two" basedir="." default="tar">
     <property name="src" value="src"/>
     <property name="output" value="bin"/>
-	<property name="groupname" value="twoconnecttwo" />
+    <property name="groupname" value="twoconnecttwo" />
 	
-	<target name="tar">
+	<target name="tar">	
 		<tstamp>
 			<format property="NOW" pattern="yyyyMMdd" />
 		</tstamp>
-		<tar destfile="${groupname}${NOW}.tar">
+    	<property name="filename" value="${groupname}${NOW}" />
+		<tar destfile="${filename}.tar">
 			<tarfileset dir="${src}" includes="**/*.java" />
 			<tarfileset file="makeinfo" />
 			<tarfileset file="manifest" />
 		</tar>
-		<gzip src="${groupname}${NOW}.tar" destfile="${groupname}${NOW}.tar.gz"/>
+		<gzip src="${filename}.tar" destfile="${filename}.tar.gz"/>
+		<delete>
+			<fileset file="${filename}.tar" />
+		</delete>
+	</target>
+
+	<target name="makeai" depends="tar">
+		<echo message="invoking makeai script on ${filename}" />
+		<exec executable="./makeai">
+			<arg value="${filename}" />
+		</exec>
+		<antcall target="cleantar" />
+	</target>
+
+	<target name="cleantar">
+		<echo message="deleting ${groupname}*.tar.gz" />
+		<delete>
+	        <fileset file="${groupname}*.tar.gz" />
+		</delete>
 	</target>
 </project>

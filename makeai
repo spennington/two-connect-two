@@ -112,10 +112,7 @@ if [ "${COMP}" = "java" ]; then
 
 	# Then combine the class files into a jar file and set the default
 	# class with the manifest
-	jar cm0f ${MANIF} ${groupname}.jar *.class
-	# rename the jar
-	mv ${groupname}.jar ${groupname}
-	chmod +x ${groupname}
+	jar cm0f ${MANIF} ${groupname} *.class
 else
 	# If not java, compile appropriately
 	${COMP} -o ${groupname} ${FLAGS} ${FILES}
