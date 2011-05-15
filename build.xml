@@ -3,7 +3,7 @@
     <property name="output" value="bin"/>
     <property name="groupname" value="twoconnecttwo" />
 	
-	<target name="tar">	
+	<target name="tar" depends="compile">	
 		<tstamp>
 			<format property="NOW" pattern="yyyyMMdd" />
 		</tstamp>
@@ -32,5 +32,9 @@
 		<delete>
 	        <fileset file="${groupname}*.tar.gz" />
 		</delete>
+	</target>
+	
+	<target name="compile">
+		<javac srcdir="${src}" destdir="${output}" />
 	</target>
 </project>
