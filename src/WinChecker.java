@@ -93,7 +93,7 @@ public class WinChecker {
 	}
 	
 	public static int isWin(Board board, final int lastCol) {
-		int lastRow = board.getTop(lastCol);
+		int lastRow = board.getTop(lastCol) - 1;
 
 		//used to keep track of the cumulative score
 		//for both players

@@ -8,7 +8,7 @@
  *
  */
 public class Board implements Cloneable {
-	
+
 	/**
 	 * Encoding of the red piece
 	 */
@@ -52,7 +52,10 @@ public class Board implements Cloneable {
 	}
 	
 	/**
-	 * Place a piece in the board
+	 * Place a piece in the board. This allows for arbitrary placement
+	 * of pieces. If pieces are being placed into the board "in order"
+	 * (from the bottom of a column up) consider using {@link #put(int, int, byte)}
+	 * which is more efficient.
 	 * 
 	 * @param x
 	 *            X position of the piece to place. from 0 to board width
@@ -66,8 +69,9 @@ public class Board implements Cloneable {
 	public void put(int x, int y, byte piece) {
 		if(piece != SPACE) {
 			pieceCount++;
-			this.tops[x] = y;
+			this.tops[x]++;
 		}
+		
 		this.pieces[x + 3][y + 3] = piece;
 	}
 
@@ -88,6 +92,32 @@ public class Board implements Cloneable {
 	}
 	
 	/**
+	 * Place a piece in the next available space for a given column.
+	 * Do not call this method with {@link Board#SPACE}, instead call
+	 * {@link #put(int, int, byte)}. 
+	 * 
+	 * @param x
+	 * 		Column to place the piece in
+	 * @param piece
+	 * 		One of {@link Board#RED}, {@link Board#BLUE}, or {@link Board#GREEN}
+	 */
+	public void drop(int x, byte piece) {
+		this.pieces[x + 3][this.tops[x]++ + 3] = piece;
+		pieceCount++;
+	}
+	
+	/**
+	 * Remove the top piece from a column.
+	 * 
+	 * @param x
+	 * 		Column to remove a piece from
+	 */
+	public void remove(int x) {
+		this.pieces[x + 3][--this.tops[x] + 3] = Board.SPACE;
+		pieceCount--;
+	}
+	
+	/**
 	 * Determine if the board is full
 	 * 
 	 * @return <code>true</code> if the board is full,
@@ -100,10 +130,19 @@ public class Board implements Cloneable {
 	}
 	
 	/**
-	 * Retrieve the y location of the top piece in the
+	 * Determine if the the board is empty
+	 * 
+	 * @return <code>true</code> if the board has no pieces in it,
+	 * otherwise <code>false</code>
+	 */
+	public boolean isEmpty() {
+		return this.pieceCount == 0;
+	}
+	
+	/**
+	 * Retrieve the y location of the first empty spot in the
 	 * specified column. Note that if the column is empty, 0 will be returned.
-	 * This is the same value as a column with one piece in it. A column
-	 * that is full will return board height
+	 * A column that is full will return board height
 	 * 
 	 * @param x
 	 * 		Column to retrieve top piece from
@@ -113,5 +152,21 @@ public class Board implements Cloneable {
 	 */
 	public int getTop(int x) {
 		return this.tops[x];
+	}
+	
+	/**
+	 * Get the board width
+	 * @return width of the board
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * Get the board height
+	 * @return height of the board
+	 */
+	public int getHeight() {
+		return height;
 	}
 }
