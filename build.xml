@@ -1,7 +1,7 @@
 <project name="two-connect-two" basedir="." default="tar">
     <property name="src" value="src"/>
     <property name="output" value="bin"/>
-    <property name="groupname" value="twoconnecttwo" />
+    <property name="groupname" value="calypso" />
 	
 	<target name="tar" depends="compile">	
 		<tstamp>
