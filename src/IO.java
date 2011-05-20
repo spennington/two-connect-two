@@ -18,6 +18,7 @@ public class IO {
 	private static final byte SPACE_CHAR = (byte) 's';
 
 	private static byte[] charMap = new byte[256];
+	public static char[] pieceMap =new char[256];
 	
 	private static Scanner scanner;
 
@@ -28,6 +29,10 @@ public class IO {
 		charMap[BLUE_CHAR] = Board.BLUE;
 		charMap[GREEN_CHAR] = Board.GREEN;
 		charMap[SPACE_CHAR] = Board.SPACE;
+		
+		pieceMap[Board.BLUE]= 'b';
+		pieceMap[Board.RED]= 'r';
+		pieceMap[Board.GREEN]= 'g';
 	}
 	
 	/**
