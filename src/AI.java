@@ -164,7 +164,7 @@ public class AI {
 		comboMap[0x3B] = -4;
 	}
 	
-	public static Move MinMax(Board board, int depth, int lastCol) {
+	public static Move minMax(Board board, int depth) {
 		return min(board, depth);
 	}
 

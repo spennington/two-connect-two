@@ -19,7 +19,7 @@ public class TwoConnectTwo {
 			System.out.println("(4, b)");
 		} else {
 			// Input assumes first column is 1 we use first column as 0, so subtract 1
-			Move move = AI.MinMax(board, 3, gameState.lastCol - 1);
+			Move move = AI.minMax(board, 3);
 			System.out.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + ")");
 		}
 	}
