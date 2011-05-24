@@ -15,12 +15,8 @@ public class TwoConnectTwo {
 		GameState gameState = IO.parseGameState();
 		Board board = IO.parseBoard(gameState.numCols, gameState.numRows);
 		IO.close();
-		if(board.isEmpty()) {
-			System.out.println("(4, b)");
-		} else {
-			// Input assumes first column is 1 we use first column as 0, so subtract 1
-			Move move = AI.minMax(board, 3);
-			System.out.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + ")");
-		}
+		Evaluator evaluator = new AI.WinningCombosEvaluator();
+		Move move = AI.minMax(board, 3, evaluator);
+		System.out.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + ")");
 	}
 }

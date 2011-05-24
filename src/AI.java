@@ -11,13 +11,13 @@ public class AI {
 	private static byte[] comboMap = new byte[256];
 	
 	static {
-		winMap[0] = Integer.MIN_VALUE;
-		winMap[1] = Integer.MIN_VALUE - 1;
-		winMap[2] = Integer.MIN_VALUE - 2;
+		winMap[0] = Integer.MIN_VALUE + 1;
+		winMap[1] = Integer.MIN_VALUE + 2;
+		winMap[2] = Integer.MIN_VALUE + 3;
 		
-		winMap[10] = Integer.MAX_VALUE;
-		winMap[9] = Integer.MAX_VALUE - 1;
-		winMap[8] = Integer.MAX_VALUE - 2;
+		winMap[10] = Integer.MAX_VALUE - 1;
+		winMap[9] = Integer.MAX_VALUE - 2;
+		winMap[8] = Integer.MAX_VALUE - 3;
 		
 		//RSSS
 		comboMap[0x40] = 1;
@@ -42,54 +42,54 @@ public class AI {
 		comboMap[0x11] = 2;
 		
 		//RRGS
-		comboMap[0x5C] = 8;
+		comboMap[0x5C] = 20;
 		//RRSG
-		comboMap[0x53] = 8;
+		comboMap[0x53] = 20;
 		//GSRR
-		comboMap[0xC5] = 8;
+		comboMap[0xC5] = 20;
 		//SGRR
-		comboMap[0x35] = 8;
+		comboMap[0x35] = 20;
 		//RGSR
-		comboMap[0x71] = 6;
+		comboMap[0x71] = 15;
 		//RSGR
-		comboMap[0x47] = 6;
+		comboMap[0x47] = 15;
 		//GRRS
-		comboMap[0xD4] = 6;
+		comboMap[0xD4] = 15;
 		//SRRG
-		comboMap[0x1D] = 6;
+		comboMap[0x1D] = 15;
 		//RGRS
-		comboMap[0x74] = 4;
+		comboMap[0x74] = 10;
 		//RSRG
-		comboMap[0x47] = 4;
+		comboMap[0x47] = 10;
 		//GRSR
-		comboMap[0xD1] = 4;
+		comboMap[0xD1] = 10;
 		//SRGR
-		comboMap[0x1D] = 4;
+		comboMap[0x1D] = 10;
 		
 		//GGRS
-		comboMap[0xF4] = 8;
+		comboMap[0xF4] = 20;
 		//GGSR
-		comboMap[0xF1] = 8;
+		comboMap[0xF1] = 20;
 		//RSGG
-		comboMap[0x4F] = 8;
+		comboMap[0x4F] = 20;
 		//SRGG
-		comboMap[0x1F] = 8;
+		comboMap[0x1F] = 20;
 		//GRSG
-		comboMap[0xD3] = 6;
+		comboMap[0xD3] = 15;
 		//GSRG
-		comboMap[0xC7] = 6;
+		comboMap[0xC7] = 15;
 		//RGGS
-		comboMap[0x7C] = 6;
+		comboMap[0x7C] = 15;
 		//SGGR
-		comboMap[0x3D] = 6;
+		comboMap[0x3D] = 15;
 		//GRGS
-		comboMap[0xDC] = 4;
+		comboMap[0xDC] = 10;
 		//GSGR
-		comboMap[0xCD] = 4;
+		comboMap[0xCD] = 10;
 		//RGSG
-		comboMap[0x73] = 4;
+		comboMap[0x73] = 10;
 		//SGRG
-		comboMap[0x37] = 4;
+		comboMap[0x37] = 10;
 		
 		//BSSS
 		comboMap[0x80] = -1;
@@ -114,61 +114,61 @@ public class AI {
 		comboMap[0x22] = -2;
 		
 		//BBGS
-		comboMap[0xAC] = -8;
+		comboMap[0xAC] = -20;
 		//BBSG
-		comboMap[0xA3] = -8;
+		comboMap[0xA3] = -20;
 		//GSBB
-		comboMap[0xCA] = -8;
+		comboMap[0xCA] = -20;
 		//SGBB
-		comboMap[0x3A] = -8;
+		comboMap[0x3A] = -20;
 		//BGSB
-		comboMap[0xB2] = -6;
+		comboMap[0xB2] = -15;
 		//BSGB
-		comboMap[0x8D] = -6;
+		comboMap[0x8D] = -15;
 		//GBBS
-		comboMap[0xD8] = -6;
+		comboMap[0xD8] = -15;
 		//SBBG
-		comboMap[0x2B] = -6;
+		comboMap[0x2B] = -15;
 		//BGBS
-		comboMap[0xB8] = -4;
+		comboMap[0xB8] = -10;
 		//BSBG
-		comboMap[0x8B] = -4;
+		comboMap[0x8B] = -10;
 		//GBSB
-		comboMap[0xD2] = -4;
+		comboMap[0xD2] = -10;
 		//SBGB
-		comboMap[0x2D] = -4;
+		comboMap[0x2D] = -10;
 		
 		//GGBS
-		comboMap[0xF8] = -8;
+		comboMap[0xF8] = -20;
 		//GGSB
-		comboMap[0xF2] = -8;
+		comboMap[0xF2] = -20;
 		//BSGG
-		comboMap[0x8F] = -8;
+		comboMap[0x8F] = -20;
 		//SBGG
-		comboMap[0x2F] = -8;
+		comboMap[0x2F] = -20;
 		//GBSG
-		comboMap[0xE3] = -6;
+		comboMap[0xE3] = -15;
 		//GSBG
-		comboMap[0xCB] = -6;
+		comboMap[0xCB] = -15;
 		//BGGS
-		comboMap[0xBC] = -6;
+		comboMap[0xBC] = -15;
 		//SGGB
-		comboMap[0x3E] = -6;
+		comboMap[0x3E] = -15;
 		//GBGS
-		comboMap[0xEC] = -4;
+		comboMap[0xEC] = -10;
 		//GSGB
-		comboMap[0xCE] = -4;
+		comboMap[0xCE] = -10;
 		//BGSG
-		comboMap[0xB3] = -4;
+		comboMap[0xB3] = -10;
 		//SGBG
-		comboMap[0x3B] = -4;
+		comboMap[0x3B] = -10;
 	}
 	
-	public static Move minMax(Board board, int depth) {
-		return min(board, depth);
+	public static Move minMax(Board board, int depth, Evaluator evaluator) {
+		return min(board, depth, evaluator);
 	}
 
-	private static Move max(Board board, int depth) {
+	private static Move max(Board board, int depth, Evaluator evaluator) {
 		Move move = new Move();
 		int numMoves = board.getWidth();
 		int val;
@@ -179,12 +179,12 @@ public class AI {
 			}
 			board.drop(i, Board.RED);
 			int win = WinChecker.isWin(board, i);
-			if(win != 0) {
+			if(win != 0 && win != 1) {
 				val = winMap[win + 5];
 			}else if(depth == 0) {
-				val = evaluate(board);
+				val = evaluator.evaluate(board, i);
 			} else {
-				val = min(board, depth-1).score;
+				val = min(board, depth-1, evaluator).score;
 			}
 			board.remove(i);
 			if(val >= best) {
@@ -201,12 +201,12 @@ public class AI {
 			}
 			board.drop(i, Board.GREEN);
 			int win = WinChecker.isWin(board, i);
-			if(win != 0) {
+			if(win != 0 && win != 1) {
 				val = winMap[win + 5];
 			}else if(depth == 0) {
-				val = evaluate(board);
+				val = evaluator.evaluate(board, i);
 			} else {
-				val = min(board, depth-1).score;
+				val = min(board, depth-1, evaluator).score;
 			}
 			board.remove(i);
 			if(val >= best) {
@@ -220,7 +220,7 @@ public class AI {
 		return move;
 	}
 
-	private static Move min(Board board, int depth) {
+	private static Move min(Board board, int depth, Evaluator evaluator) {
 		Move move = new Move();
 		int numMoves = board.getWidth();
 		int val;
@@ -231,12 +231,12 @@ public class AI {
 			}
 			board.drop(i, Board.BLUE);
 			int win = WinChecker.isWin(board, i);
-			if(win != 0) {
+			if(win != 0 && win != 1) {
 				val = winMap[win + 5];
 			}else if(depth == 0) {
-				val = evaluate(board);
+				val = evaluator.evaluate(board, i);
 			} else {
-				val = max(board, depth-1).score;
+				val = max(board, depth-1, evaluator).score;
 			}
 			board.remove(i);
 			if(val <= best) {
@@ -253,12 +253,12 @@ public class AI {
 			}
 			board.drop(i, Board.GREEN);
 			int win = WinChecker.isWin(board, i);
-			if(win != 0) {
+			if(win != 0 && win != 1) {
 				val = winMap[win + 5];
 			}else if(depth == 0) {
-				val = evaluate(board);
+				val = evaluator.evaluate(board, i);
 			} else {
-				val = max(board, depth-1).score;
+				val = max(board, depth-1, evaluator).score;
 			}
 			board.remove(i);
 			if(val <= best) {
@@ -271,47 +271,62 @@ public class AI {
 		
 		return move;
 	}
-	
-	private static int evaluate(Board board) {
-		return winningCombos(board);
-	}
 
-	private static int winningCombos(Board board) {
-		int score = 0;
-		
-		//Horizontal
-		for(int i=0; i<board.getWidth()-4; i++) {
-			for(int j=0; j<board.getHeight(); j++) {
-				score += score(board.get(i, j), board.get(i+1, j), board.get(i+2, j), board.get(i+3, j));
+	public static class WinningCombosEvaluator implements Evaluator {
+
+		/* (non-Javadoc)
+		 * @see Evaluator#evaluate(Board)
+		 */
+		@Override
+		public int evaluate(Board board, int lastCol) {
+			int score = 0;
+			
+			//Horizontal
+			for(int i=0; i<board.getWidth()-4; i++) {
+				for(int j=0; j<board.getHeight(); j++) {
+					score += score(board.get(i, j), board.get(i+1, j), board.get(i+2, j), board.get(i+3, j));
+				}
 			}
+			
+			//Vertical
+			for(int i=0; i<board.getWidth(); i++) {
+				for(int j=0; j<board.getHeight()-4; j++) {
+					score += score(board.get(i, j), board.get(i, j+1), board.get(i, j+2), board.get(i, j+3));
+				}
+			}
+			
+			//Bottom Left to Top Right
+			for(int i=0; i<board.getWidth()-4; i++) {
+				for(int j=0; j<board.getHeight()-4; j++) {
+					score += score(board.get(i, j), board.get(i+1, j+1), board.get(i+2, j+2), board.get(i+3, j+3));
+				}
+			}
+			
+			//Top Left to Bottom Right
+			for(int i=0; i<board.getWidth()-4; i++) {
+				for(int j=0; j<board.getHeight()-4; j++) {
+					score += score(board.get(i, j+3), board.get(i+1, j+2), board.get(i+2, j+1), board.get(i+3, j));
+				}
+			}
+			
+			return score;
 		}
 		
-		//Vertical
-		for(int i=0; i<board.getWidth(); i++) {
-			for(int j=0; j<board.getHeight()-4; j++) {
-				score += score(board.get(i, j), board.get(i, j+1), board.get(i, j+2), board.get(i, j+3));
-			}
+		public byte score(byte a, byte b, byte c, byte d) {
+			return comboMap[(a << 6) | (b << 4) | (c << 2) | d];
 		}
 		
-		//Bottom Left to Top Right
-		for(int i=0; i<board.getWidth()-4; i++) {
-			for(int j=0; j<board.getHeight()-4; j++) {
-				score += score(board.get(i, j), board.get(i+1, j+1), board.get(i+2, j+2), board.get(i+3, j+3));
-			}
-		}
-		
-		//Top Left to Bottom Right
-		for(int i=0; i<board.getWidth()-4; i++) {
-			for(int j=0; j<board.getHeight()-4; j++) {
-				score += score(board.get(i, j+3), board.get(i+1, j+2), board.get(i+2, j+1), board.get(i+3, j));
-			}
-		}
-		
-		return score;
 	}
 	
-	public static byte score(byte a, byte b, byte c, byte d) {
-		return comboMap[(a << 6) | (b << 4) | (c << 2) | d];
-	}
+	public static class WinCheckEvaluator implements Evaluator {
 
+		/* (non-Javadoc)
+		 * @see Evaluator#evaluate(Board)
+		 */
+		@Override
+		public int evaluate(Board board, int lastCol) {
+			return WinChecker.isWin(board, lastCol);
+		}
+		
+	}
 }
