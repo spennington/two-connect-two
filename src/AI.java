@@ -21,10 +21,10 @@ public class AI {
 		
 		//RSSS
 		comboMap[0x40] = 1;
-		//SRSS
-		comboMap[0x10] = 1;
 		//SSRS
 		comboMap[0x04] = 1;
+		//SRSS
+		comboMap[0x10] = 1;
 		//SSSR
 		comboMap[0x01] = 1;
 		
@@ -41,22 +41,47 @@ public class AI {
 		//SRSR
 		comboMap[0x11] = 2;
 		
+		//SRGS
+		comboMap[0x1C] = 8;
+		//GSSR
+		comboMap[0xC1] = 8;
+		//SGRS
+		comboMap[0x34] = 8;
+		//RSSG
+		comboMap[0x43] = 8;
+		//RSGS
+		comboMap[0x4C] = 8;
+		//GSRS
+		comboMap[0xC4] = 8;
+		//SRSG
+		comboMap[0x13] = 8;
+		//SGSR
+		comboMap[0x31] = 8;
+		//GRSS
+		comboMap[0xD0] = 6;
+		//SSGR
+		comboMap[0x0D] = 6;
+		//RGSS
+		comboMap[0x70] = 6;
+		//SSRG
+		comboMap[0x07] = 6;
+		
 		//RRGS
 		comboMap[0x5C] = 20;
-		//RRSG
-		comboMap[0x53] = 20;
 		//GSRR
 		comboMap[0xC5] = 20;
+		//RRSG
+		comboMap[0x53] = 20;
 		//SGRR
 		comboMap[0x35] = 20;
 		//RGSR
 		comboMap[0x71] = 15;
+		//SRRG
+		comboMap[0x17] = 15;
 		//RSGR
-		comboMap[0x47] = 15;
+		comboMap[0x4D] = 15;
 		//GRRS
 		comboMap[0xD4] = 15;
-		//SRRG
-		comboMap[0x1D] = 15;
 		//RGRS
 		comboMap[0x74] = 10;
 		//RSRG
@@ -68,20 +93,20 @@ public class AI {
 		
 		//GGRS
 		comboMap[0xF4] = 20;
-		//GGSR
-		comboMap[0xF1] = 20;
 		//RSGG
 		comboMap[0x4F] = 20;
+		//GGSR
+		comboMap[0xF1] = 20;
 		//SRGG
 		comboMap[0x1F] = 20;
 		//GRSG
 		comboMap[0xD3] = 15;
+		//SGGR
+		comboMap[0x3D] = 15;
 		//GSRG
 		comboMap[0xC7] = 15;
 		//RGGS
 		comboMap[0x7C] = 15;
-		//SGGR
-		comboMap[0x3D] = 15;
 		//GRGS
 		comboMap[0xDC] = 10;
 		//GSGR
@@ -93,10 +118,10 @@ public class AI {
 		
 		//BSSS
 		comboMap[0x80] = -1;
-		//SBSS
-		comboMap[0x20] = -1;
 		//SSBS
 		comboMap[0x08] = -1;
+		//SBSS
+		comboMap[0x20] = -1;
 		//SSSB
 		comboMap[0x02] = -1;
 		
@@ -113,47 +138,72 @@ public class AI {
 		//SBSB
 		comboMap[0x22] = -2;
 		
+		//SGBS
+		comboMap[0x38] = -8;
+		//BSSG
+		comboMap[0x83] = -8;
+		//GSSB
+		comboMap[0xC2] = -8;
+		//SBGS
+		comboMap[0x2C] = -8;
+		//BGSS
+		comboMap[0xB0] = -6;
+		//SSBG
+		comboMap[0x0B] = -6;
+		//GBSS
+		comboMap[0xE0] = -6;
+		//SSGB
+		comboMap[0x0E] = -6;
+		//BSGS
+		comboMap[0x8C] = -8;
+		//GSBS
+		comboMap[0xC8] = -8;
+		//SBSG
+		comboMap[0x23] = -8;
+		//SGSB
+		comboMap[0x32] = -8;
+		
 		//BBGS
 		comboMap[0xAC] = -20;
-		//BBSG
-		comboMap[0xA3] = -20;
 		//GSBB
 		comboMap[0xCA] = -20;
+		//BBSG
+		comboMap[0xA3] = -20;
 		//SGBB
 		comboMap[0x3A] = -20;
 		//BGSB
 		comboMap[0xB2] = -15;
-		//BSGB
-		comboMap[0x8D] = -15;
-		//GBBS
-		comboMap[0xD8] = -15;
 		//SBBG
 		comboMap[0x2B] = -15;
+		//BSGB
+		comboMap[0x8E] = -15;
+		//GBBS
+		comboMap[0xE8] = -15;
 		//BGBS
 		comboMap[0xB8] = -10;
 		//BSBG
 		comboMap[0x8B] = -10;
 		//GBSB
-		comboMap[0xD2] = -10;
+		comboMap[0xE2] = -10;
 		//SBGB
-		comboMap[0x2D] = -10;
+		comboMap[0x2E] = -10;
 		
 		//GGBS
 		comboMap[0xF8] = -20;
-		//GGSB
-		comboMap[0xF2] = -20;
 		//BSGG
 		comboMap[0x8F] = -20;
+		//GGSB
+		comboMap[0xF2] = -20;
 		//SBGG
 		comboMap[0x2F] = -20;
 		//GBSG
 		comboMap[0xE3] = -15;
+		//SGGB
+		comboMap[0x3E] = -15;
 		//GSBG
 		comboMap[0xCB] = -15;
 		//BGGS
 		comboMap[0xBC] = -15;
-		//SGGB
-		comboMap[0x3E] = -15;
 		//GBGS
 		comboMap[0xEC] = -10;
 		//GSGB
