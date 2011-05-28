@@ -1,7 +1,12 @@
+package calypso.twoconnecttwo.ai;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import calypso.twoconnecttwo.Board;
+import calypso.twoconnecttwo.TestUtils;
+import calypso.twoconnecttwo.ai.WinChecker;
 
 
 /**

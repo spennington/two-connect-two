@@ -1,9 +1,13 @@
+package calypso.twoconnecttwo;
 /**
  * 
  */
 
 
 import java.io.ByteArrayInputStream;
+
+import calypso.twoconnecttwo.Board;
+import calypso.twoconnecttwo.IO;
 
 /**
  * @author steve

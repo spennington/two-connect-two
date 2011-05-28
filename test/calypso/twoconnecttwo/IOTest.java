@@ -1,8 +1,13 @@
+package calypso.twoconnecttwo;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
 
 import org.junit.Test;
+
+import calypso.twoconnecttwo.Board;
+import calypso.twoconnecttwo.GameState;
+import calypso.twoconnecttwo.IO;
 
 
 /**

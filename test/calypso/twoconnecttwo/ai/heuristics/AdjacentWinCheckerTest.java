@@ -1,7 +1,13 @@
+package calypso.twoconnecttwo.ai.heuristics;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import calypso.twoconnecttwo.Board;
+import calypso.twoconnecttwo.TestUtils;
+import calypso.twoconnecttwo.ai.heuristics.Evaluator;
+import calypso.twoconnecttwo.ai.heuristics.FutureWinEvaluator;
 
 /**
  * 

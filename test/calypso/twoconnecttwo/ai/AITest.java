@@ -1,9 +1,18 @@
+package calypso.twoconnecttwo.ai;
 
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
 
 import org.junit.Test;
+
+import calypso.twoconnecttwo.Board;
+import calypso.twoconnecttwo.TestUtils;
+import calypso.twoconnecttwo.ai.AI;
+import calypso.twoconnecttwo.ai.Move;
+import calypso.twoconnecttwo.ai.heuristics.ChainEvaluator;
+import calypso.twoconnecttwo.ai.heuristics.ConsecutivePieceEvaluator;
+import calypso.twoconnecttwo.ai.heuristics.Evaluator;
 
 
 /**
