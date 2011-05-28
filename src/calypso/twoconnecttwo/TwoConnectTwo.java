@@ -1,4 +1,9 @@
+package calypso.twoconnecttwo;
 
+import calypso.twoconnecttwo.ai.AI;
+import calypso.twoconnecttwo.ai.Move;
+import calypso.twoconnecttwo.ai.heuristics.ChainEvaluator;
+import calypso.twoconnecttwo.ai.heuristics.Evaluator;
 
 /**
  * @author Steve Pennington and Julie Sparrow

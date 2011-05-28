@@ -1,10 +1,12 @@
+package calypso.twoconnecttwo.ai;
+
+import calypso.twoconnecttwo.Board;
+
 /**
  * A class to determine if a given board has a winner using
  * the win conditions outlined in the Two Connect Two specification
  * found at http://www.ece.uvic.ca/~sneville/Teaching/CEng420/Project/Course%20Project.pdf
- */
-
-/**
+ * 
  * @author Steve Pennington and Julie Sparrow
  *
  */

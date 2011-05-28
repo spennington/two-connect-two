@@ -1,13 +1,12 @@
+package calypso.twoconnecttwo.ai.heuristics;
+
+import calypso.twoconnecttwo.Board;
+
 /**
  * Evaluates the board based on the number of consecutive
  * pieces. Specifically, it looks at all 4-tuples of consecutive
  * pieces on the board and uses weightings to determine the 4-tuples
  * worth. (Ex. RRGS is worth more than RRSS)
- */
-
-
-
-/**
  * @author Steve Pennington and Julie Sparrow
  *
  */

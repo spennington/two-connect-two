@@ -1,13 +1,13 @@
+package calypso.twoconnecttwo.ai.heuristics;
 
+import calypso.twoconnecttwo.Board;
 
 /**
  * Evaluates the board based on the locations of
  * possible future wins. More specifically, looks at all
  * the empty squares on the board and determines if they 
  * are one piece away from a win.
- */
-
-/**
+ * 
  * @author Steve Pennington and Julie Sparrow
  *
  */

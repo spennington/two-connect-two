@@ -1,10 +1,10 @@
+package calypso.twoconnecttwo;
+
 /**
  * A simple data storage object used to represent
  * information pertaining to the current game of
  * Two Connect Two
- */
-
-/**
+ * 
  * @author Steve Pennington and Julie Sparrow
  *
  */

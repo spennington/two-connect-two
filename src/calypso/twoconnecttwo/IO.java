@@ -1,12 +1,13 @@
+package calypso.twoconnecttwo;
+
 import java.io.InputStream;
 import java.util.Scanner;
+
 
 /**
  * A class to convert the string recieved from the Game
  * Framework to a {@link Board} and {@link GameState}
- */
-
-/**
+ * 
  * @author Steve Pennington and Julie Sparrow
  *
  */

@@ -1,9 +1,9 @@
+package calypso.twoconnecttwo;
+
 /**
  * This class represents a Two Connect Two game board
  * and provides functionality to manipulate pieces
- */
-
-/**
+ * 
  * @author Steve Pennington and Julie Sparrow
  *
  */

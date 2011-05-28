@@ -1,11 +1,12 @@
+package calypso.twoconnecttwo.ai.heuristics;
+
+import calypso.twoconnecttwo.Board;
+import calypso.twoconnecttwo.ai.WinChecker;
+
 /**
  * Evaluates the board based on the existence of a winner.
  * Simply uses {@link WinChecker} to search for a winner.
- */
-
-
-
-/**
+ * 
  * @author Steve Pennington and Julie Sparrow
  *
  */
