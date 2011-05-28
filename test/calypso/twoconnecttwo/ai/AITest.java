@@ -2,8 +2,6 @@ package calypso.twoconnecttwo.ai;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
-
 import org.junit.Test;
 
 import calypso.twoconnecttwo.Board;
