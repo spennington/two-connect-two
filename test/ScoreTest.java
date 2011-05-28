@@ -1,8 +1,8 @@
+
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
-
 import org.junit.Test;
+
 
 /**
  * @author Steve Pennington and Julie Sparrow
@@ -42,9 +42,9 @@ public class ScoreTest {
 	 */
 	@Test
 	public void testVerticalIsWin() {
-		Board board = generateBoard("b,g,g,b,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s");
+		Board board = TestUtils.generateBoard("b,g,g,b,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s", 10, 8);
 		assertEquals(-4, WinChecker.isWin(board, 0));
-		board = generateBoard("b,b,g,g,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s");
+		board = TestUtils.generateBoard("b,b,g,g,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s", 10, 8);
 		assertEquals(-5, WinChecker.isWin(board, 0));
 	}
 	
@@ -53,13 +53,13 @@ public class ScoreTest {
 	 */
 	@Test
 	public void testHorizontalIsWin() {
-		Board board = generateBoard("b,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s");
+		Board board = TestUtils.generateBoard("b,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s", 10, 8);
 		assertEquals(-5, WinChecker.isWin(board, 0));
 		assertEquals(-5, WinChecker.isWin(board, 1));
 		assertEquals(-5, WinChecker.isWin(board, 2));
 		assertEquals(-5, WinChecker.isWin(board, 3));
 		
-		board = generateBoard("s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s");
+		board = TestUtils.generateBoard("s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s", 10, 8);
 		assertEquals(-5, WinChecker.isWin(board, 6));
 		assertEquals(-5, WinChecker.isWin(board, 7));
 		assertEquals(-5, WinChecker.isWin(board, 8));
@@ -71,15 +71,17 @@ public class ScoreTest {
 	 */
 	@Test
 	public void testDiagonalIsWin() {
-		Board board = generateBoard("b,s,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s");
+		Board board = TestUtils.generateBoard("b,s,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,s,g,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s", 10, 8);
 		assertEquals(-5, WinChecker.isWin(board, 0));
-		board = generateBoard("b,b,r,b,s,s,s,s,r,b,b,s,s,s,s,s,r,r,g,s,s,s,s,s,r,r,r,g,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s");
+		board = TestUtils.generateBoard("b,b,r,b,s,s,s,s,r,b,b,s,s,s,s,s,r,r,g,s,s,s,s,s,r,r,r,g,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s", 10, 8);
 		assertEquals(-5, WinChecker.isWin(board, 3));
-		board = generateBoard("s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,r,r,r,r,g,s,s,s,r,r,r,r,r,g,s,s,r,r,r,r,r,r,b,s,r,r,r,r,r,r,r,b");
+		board = TestUtils.generateBoard("s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,r,r,r,r,g,s,s,s,r,r,r,r,r,g,s,s,r,r,r,r,r,r,b,s,r,r,r,r,r,r,r,b", 10, 8);
 		assertEquals(-5, WinChecker.isWin(board, 6));
 		assertEquals(-5, WinChecker.isWin(board, 7));
 		assertEquals(-5, WinChecker.isWin(board, 8));
 		assertEquals(-5, WinChecker.isWin(board, 9));
+		board = TestUtils.generateBoard("r,g,r,b,r,b,s,s,g,b,b,r,r,r,s,s,g,r,b,r,b,r,g,s,b,r,g,r,b,g,s,s,r,b,r,b,b,g,r,b,r,b,r,b,r,r,g,b,b,g,r,b,r,b,r,g,g,r,s,s,s,s,s,s,r,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s", 10, 8);
+		assertEquals(5, WinChecker.isWin(board, 3));
 	}
 	
 	/**
@@ -87,9 +89,9 @@ public class ScoreTest {
 	 */
 	@Test
 	public void testMultipleWinnerIsWin() {
-		Board board = generateBoard("b,b,g,g,s,s,s,s,r,r,r,r,s,s,s,s,r,r,r,g,s,s,s,s,r,r,r,r,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s");
+		Board board = TestUtils.generateBoard("b,b,g,g,s,s,s,s,r,r,r,r,s,s,s,s,r,r,r,g,s,s,s,s,r,r,r,r,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s", 10, 8);
 		assertEquals(-5, WinChecker.isWin(board, 0));
-		board = generateBoard("b,b,g,g,s,s,s,s,r,r,r,r,s,s,s,s,r,g,g,g,s,s,s,s,r,r,r,r,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s");
+		board = TestUtils.generateBoard("b,b,g,g,s,s,s,s,r,r,r,r,s,s,s,s,r,g,g,g,s,s,s,s,r,r,r,r,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s", 10, 8);
 		assertEquals(3, WinChecker.isWin(board, 0));
 	}
 	
@@ -98,14 +100,8 @@ public class ScoreTest {
 	 */
 	@Test
 	public void testNoWinners() {
-		Board board = generateBoard("b,b,b,b,b,b,b,b,r,r,r,r,b,b,b,b,r,r,r,b,b,b,b,b,r,r,r,r,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b");
+		Board board = TestUtils.generateBoard("b,b,b,b,b,b,b,b,r,r,r,r,b,b,b,b,r,r,r,b,b,b,b,b,r,r,r,r,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b", 10, 8);
 		assertEquals(0, WinChecker.isWin(board, 0));
 	}
 	
-	private Board generateBoard(String config) {
-		IO.init(new ByteArrayInputStream(config.getBytes()));
-		Board board = IO.parseBoard(NUM_COLS, NUM_ROWS);
-		IO.close();
-		return board;
-	}
 }

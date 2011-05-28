@@ -104,7 +104,10 @@ public class IO {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				byte piece = scanner.next().getBytes()[0];
-				board.put(i, j, charMap[piece]);
+				piece = charMap[piece];
+				if(piece != Board.SPACE) {
+					board.drop(i, piece);
+				}
 			}
 		}
 		

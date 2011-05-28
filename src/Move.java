@@ -3,7 +3,7 @@
  */
 
 /**
- * @author steve
+ * @author Steven Pennington and Julie Sparrow
  *
  */
 public class Move {

@@ -50,30 +50,6 @@ public class Board implements Cloneable {
 		pieces = new byte[width + PADDING][height + PADDING];
 		tops = new int[width];
 	}
-	
-	/**
-	 * Place a piece in the board. This allows for arbitrary placement
-	 * of pieces. If pieces are being placed into the board "in order"
-	 * (from the bottom of a column up) consider using {@link #put(int, int, byte)}
-	 * which is more efficient.
-	 * 
-	 * @param x
-	 *            X position of the piece to place. from 0 to board width
-	 * @param y
-	 *            Y position of the piece to place. from 0 to board height
-	 * @param piece
-	 *            Piece to place in the board. Should be one
-	 *            {@link Board#BLUE}, {@link Board#RED}, or
-	 *            {@link Board#GREEN}
-	 */
-	public void put(int x, int y, byte piece) {
-		if(piece != SPACE) {
-			pieceCount++;
-			this.tops[x]++;
-		}
-		
-		this.pieces[x + 3][y + 3] = piece;
-	}
 
 	/**
 	 * Retrieve a piece from the board.
@@ -168,5 +144,13 @@ public class Board implements Cloneable {
 	 */
 	public int getHeight() {
 		return height;
+	}
+	
+	/**
+	 * Get the number of non-empty pieces in the board
+	 * @return Number of non-empty pieces in the board
+	 */
+	public int getPieceCount() {
+		return pieceCount;
 	}
 }
