@@ -230,15 +230,15 @@ public class ConsecutivePieceEvaluator implements Evaluator {
 		}
 		
 		//Bottom Left to Top Right
-		for(int i=0; i<board.getWidth()-4; i++) {
-			for(int j=0; j<board.getHeight()-4; j++) {
+		for(int i=0; i<board.getWidth()-3; i++) {
+			for(int j=0; j<board.getHeight()-3; j++) {
 				score += score(board.get(i, j), board.get(i+1, j+1), board.get(i+2, j+2), board.get(i+3, j+3));
 			}
 		}
 		
 		//Top Left to Bottom Right
-		for(int i=0; i<board.getWidth()-4; i++) {
-			for(int j=0; j<board.getHeight()-4; j++) {
+		for(int i=0; i<board.getWidth()-3; i++) {
+			for(int j=0; j<board.getHeight()-3; j++) {
 				score += score(board.get(i, j+3), board.get(i+1, j+2), board.get(i+2, j+1), board.get(i+3, j));
 			}
 		}
