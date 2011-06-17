@@ -1,7 +1,3 @@
-package calypso.twoconnecttwo.ai.heuristics;
-
-import calypso.twoconnecttwo.Board;
-
 /**
  * Evaluates the board based on the locations of
  * possible future wins. More specifically, looks at all

@@ -1,5 +1,3 @@
-package calypso.twoconnecttwo.ai;
-
 /**
  * @author Steven Pennington and Julie Sparrow
  *

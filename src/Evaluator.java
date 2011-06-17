@@ -1,7 +1,3 @@
-package calypso.twoconnecttwo.ai.heuristics;
-
-import calypso.twoconnecttwo.Board;
-
 /**
  * @author Steve Pennington and Julie Sparrow
  *

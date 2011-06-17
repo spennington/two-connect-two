@@ -1,8 +1,3 @@
-package calypso.twoconnecttwo.ai;
-
-import calypso.twoconnecttwo.Board;
-import calypso.twoconnecttwo.ai.heuristics.Evaluator;
-
 /**
  * Implementation of the minimax algorithm to determine a "good"
  * two connect two move

@@ -1,7 +1,3 @@
-package calypso.twoconnecttwo.ai.heuristics;
-
-import calypso.twoconnecttwo.Board;
-
 /**
  * Evaluates the board based on the number of consecutive
  * pieces. Specifically, it looks at all 4-tuples of consecutive

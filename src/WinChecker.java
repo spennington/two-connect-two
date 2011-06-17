@@ -1,7 +1,3 @@
-package calypso.twoconnecttwo.ai;
-
-import calypso.twoconnecttwo.Board;
-
 /**
  * A class to determine if a given board has a winner using
  * the win conditions outlined in the Two Connect Two specification
