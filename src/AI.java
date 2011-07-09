@@ -47,10 +47,9 @@ public class AI {
 			return lastMove;
 		}
 			
-		Move move = new Move();
 		int numMoves = board.getWidth();
-		int val;
-		int best = Integer.MIN_VALUE;
+		Move val;
+		Move best = new Move(0, Integer.MIN_VALUE, Board.RED);
 		for(int i=0; i<numMoves; i++) {
 			if(board.getTop(i) == board.getHeight()) {
 				continue;
@@ -59,29 +58,27 @@ public class AI {
 			board.drop(i, Board.RED);
 			lastMove.piece = Board.RED;
 			lastMove.column = i;
-			val = min(board, depth-1, evaluator, lastMove).score;
+			val = min(board, depth-1, evaluator, lastMove);
 			board.remove(i);
-			if(val > best) {
-				best = val;
-				move.column = i;
-				move.score = best;
-				move.piece = Board.RED;
+			if(val.score > best.score) {
+				best.score = val.score;
+				best.piece = Board.RED;
+				best.column = i;
 			}
 			
 			board.drop(i, Board.GREEN);
 			lastMove.piece = Board.GREEN;
 			lastMove.column = i;
-			val = min(board, depth-1, evaluator, lastMove).score;
+			val = min(board, depth-1, evaluator, lastMove);
 			board.remove(i);
-			if(val > best) {
-				best = val;
-				move.column = i;
-				move.score = best;
-				move.piece = Board.GREEN;
+			if(val.score > best.score) {
+				best.score = val.score;
+				best.piece = Board.GREEN;
+				best.column = i;
 			}
 		}
 		
-		return move;
+		return best;
 	}
 
 	private static Move min(Board board, int depth, Evaluator evaluator, Move lastMove) {
@@ -98,10 +95,9 @@ public class AI {
 			}
 		}
 		
-		Move move = new Move();
 		int numMoves = board.getWidth();
-		int val;
-		int best = Integer.MAX_VALUE;
+		Move val;
+		Move best = new Move(0, Integer.MAX_VALUE, Board.RED);
 		for(int i=0; i<numMoves; i++) {
 			if(board.getTop(i) == board.getHeight()) {
 				continue;
@@ -110,29 +106,27 @@ public class AI {
 			board.drop(i, Board.BLUE);
 			lastMove.piece = Board.BLUE;
 			lastMove.column = i;
-			val = max(board, depth-1, evaluator, lastMove).score;
+			val = max(board, depth-1, evaluator, lastMove);
 			board.remove(i);
-			if(val < best) {
-				best = val;
-				move.column = i;
-				move.score = best;
-				move.piece = Board.BLUE;
+			if(val.score < best.score) {
+				best.score = val.score;
+				best.piece = Board.BLUE;
+				best.column = i;
 			}
 			
 			board.drop(i, Board.GREEN);
 			lastMove.piece = Board.GREEN;
 			lastMove.column = i;
-			val = max(board, depth-1, evaluator, lastMove).score;
+			val = max(board, depth-1, evaluator, lastMove);
 			board.remove(i);
-			if(val < best) {
-				best = val;
-				move.column = i;
-				move.score = best;
-				move.piece = Board.GREEN;
+			if(val.score < best.score) {
+				best.score = val.score;
+				best.piece = Board.GREEN;
+				best.column = i;
 			}
 		}
 		
-		return move;
+		return best;
 	}
 	
 }
