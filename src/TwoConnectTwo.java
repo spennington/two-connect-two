@@ -15,7 +15,7 @@ public class TwoConnectTwo {
 		Board board = IO.parseBoard(gameState.numCols, gameState.numRows);
 		IO.close();
 		Evaluator evaluator = ChainEvaluator.getInstance();
-		Move move = AI.minMax(board, 4, evaluator);
+		Move move = AI.minMax(board, 6, evaluator);
 		System.out.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + ")");
 	}
 }
