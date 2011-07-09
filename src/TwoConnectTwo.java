@@ -15,12 +15,7 @@ public class TwoConnectTwo {
 		Board board = IO.parseBoard(gameState.numCols, gameState.numRows);
 		IO.close();
 		Evaluator evaluator = ChainEvaluator.getInstance();
-		long time = System.currentTimeMillis();
-		Move move;
-		move = AI.minMax(board, 3, evaluator);
-		time = System.currentTimeMillis() - time;
-		System.err.println("took " + time);
-		System.err.println("depth 5 " + time*400);
+		Move move = AI.minMax(board, 4, evaluator);
 		System.out.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + ")");
 	}
 }
