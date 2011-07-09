@@ -26,8 +26,7 @@ public class AI {
 	 * 		Starting point of the twoconnecttwo game
 	 * @param depth
 	 * 		Number of pieces to play before evaluating the
-	 * 		game. Depth of 0 drops 1 piece, depth of 1 drops 2 pieces
-	 * 		etc...
+	 * 		game.
 	 * @param evaluator
 	 * 		Heuristic to apply once the game tree has reached a terminal node.
 	 * 		The implementation will only apply the evaluator if the terminal node
