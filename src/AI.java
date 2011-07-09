@@ -34,10 +34,10 @@ public class AI {
 	 * @return "Best" move to make given the current game state
 	 */
 	public static Move minMax(Board board, int depth, Evaluator evaluator) {
-		return min(board, depth, evaluator, null);
+		return min(board, depth, evaluator, null, new Move(0, Integer.MIN_VALUE, Board.RED), new Move(0, Integer.MAX_VALUE, Board.BLUE));
 	}
 
-	private static Move max(Board board, int depth, Evaluator evaluator, Move lastMove) {
+	private static Move max(Board board, int depth, Evaluator evaluator, Move lastMove, Move alpha, Move beta) {
 		int win = WinChecker.isWin(board, lastMove.column);
 		if(win != 0 && win != 1) {
 			lastMove.score = winMap[win + 5];
@@ -49,7 +49,6 @@ public class AI {
 			
 		int numMoves = board.getWidth();
 		Move val;
-		Move best = new Move(0, Integer.MIN_VALUE, Board.RED);
 		for(int i=0; i<numMoves; i++) {
 			if(board.getTop(i) == board.getHeight()) {
 				continue;
@@ -58,30 +57,38 @@ public class AI {
 			board.drop(i, Board.RED);
 			lastMove.piece = Board.RED;
 			lastMove.column = i;
-			val = min(board, depth-1, evaluator, lastMove);
+			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
 			board.remove(i);
-			if(val.score > best.score) {
-				best.score = val.score;
-				best.piece = Board.RED;
-				best.column = i;
+			if(val.score > alpha.score) {
+				alpha.score = val.score;
+				alpha.piece = Board.RED;
+				alpha.column = i;
+			}
+			
+			if(alpha.score >= beta.score) {
+				return alpha;
 			}
 			
 			board.drop(i, Board.GREEN);
 			lastMove.piece = Board.GREEN;
 			lastMove.column = i;
-			val = min(board, depth-1, evaluator, lastMove);
+			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
 			board.remove(i);
-			if(val.score > best.score) {
-				best.score = val.score;
-				best.piece = Board.GREEN;
-				best.column = i;
+			if(val.score > alpha.score) {
+				alpha.score = val.score;
+				alpha.piece = Board.GREEN;
+				alpha.column = i;
+			}
+			
+			if(alpha.score >= beta.score) {
+				return alpha;
 			}
 		}
 		
-		return best;
+		return alpha;
 	}
 
-	private static Move min(Board board, int depth, Evaluator evaluator, Move lastMove) {
+	private static Move min(Board board, int depth, Evaluator evaluator, Move lastMove, Move alpha, Move beta) {
 		if(lastMove == null) {
 			lastMove = new Move();
 		} else {
@@ -97,7 +104,6 @@ public class AI {
 		
 		int numMoves = board.getWidth();
 		Move val;
-		Move best = new Move(0, Integer.MAX_VALUE, Board.RED);
 		for(int i=0; i<numMoves; i++) {
 			if(board.getTop(i) == board.getHeight()) {
 				continue;
@@ -106,27 +112,35 @@ public class AI {
 			board.drop(i, Board.BLUE);
 			lastMove.piece = Board.BLUE;
 			lastMove.column = i;
-			val = max(board, depth-1, evaluator, lastMove);
+			val = max(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
 			board.remove(i);
-			if(val.score < best.score) {
-				best.score = val.score;
-				best.piece = Board.BLUE;
-				best.column = i;
+			if(val.score < beta.score) {
+				beta.score = val.score;
+				beta.piece = Board.BLUE;
+				beta.column = i;
+			}
+			
+			if(alpha.score >= beta.score) {
+				return beta;
 			}
 			
 			board.drop(i, Board.GREEN);
 			lastMove.piece = Board.GREEN;
 			lastMove.column = i;
-			val = max(board, depth-1, evaluator, lastMove);
+			val = max(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
 			board.remove(i);
-			if(val.score < best.score) {
-				best.score = val.score;
-				best.piece = Board.GREEN;
-				best.column = i;
+			if(val.score < beta.score) {
+				beta.score = val.score;
+				beta.piece = Board.GREEN;
+				beta.column = i;
+			}
+			
+			if(alpha.score >= beta.score) {
+				return beta;
 			}
 		}
 		
-		return best;
+		return beta;
 	}
 	
 }
