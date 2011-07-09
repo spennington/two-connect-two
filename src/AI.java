@@ -35,10 +35,19 @@ public class AI {
 	 * @return "Best" move to make given the current game state
 	 */
 	public static Move minMax(Board board, int depth, Evaluator evaluator) {
-		return min(board, depth, evaluator);
+		return min(board, depth, evaluator, null);
 	}
 
-	private static Move max(Board board, int depth, Evaluator evaluator) {
+	private static Move max(Board board, int depth, Evaluator evaluator, Move lastMove) {
+		int win = WinChecker.isWin(board, lastMove.column);
+		if(win != 0 && win != 1) {
+			lastMove.score = winMap[win + 5];
+			return lastMove;
+		}else if(depth == 0) {
+			lastMove.score = evaluator.evaluate(board, lastMove.column);
+			return lastMove;
+		}
+			
 		Move move = new Move();
 		int numMoves = board.getWidth();
 		int val;
@@ -47,15 +56,11 @@ public class AI {
 			if(board.getTop(i) == board.getHeight()) {
 				continue;
 			}
+			
 			board.drop(i, Board.RED);
-			int win = WinChecker.isWin(board, i);
-			if(win != 0 && win != 1) {
-				val = winMap[win + 5];
-			}else if(depth == 0) {
-				val = evaluator.evaluate(board, i);
-			} else {
-				val = min(board, depth-1, evaluator).score;
-			}
+			lastMove.piece = Board.RED;
+			lastMove.column = i;
+			val = min(board, depth-1, evaluator, lastMove).score;
 			board.remove(i);
 			if(val > best) {
 				best = val;
@@ -63,21 +68,11 @@ public class AI {
 				move.score = best;
 				move.piece = Board.RED;
 			}
-		}
-		
-		for(int i=0; i<numMoves; i++) {
-			if(board.getTop(i) == board.getHeight()) {
-				continue;
-			}
+			
 			board.drop(i, Board.GREEN);
-			int win = WinChecker.isWin(board, i);
-			if(win != 0 && win != 1) {
-				val = winMap[win + 5];
-			}else if(depth == 0) {
-				val = evaluator.evaluate(board, i);
-			} else {
-				val = min(board, depth-1, evaluator).score;
-			}
+			lastMove.piece = Board.GREEN;
+			lastMove.column = i;
+			val = min(board, depth-1, evaluator, lastMove).score;
 			board.remove(i);
 			if(val > best) {
 				best = val;
@@ -90,7 +85,20 @@ public class AI {
 		return move;
 	}
 
-	private static Move min(Board board, int depth, Evaluator evaluator) {
+	private static Move min(Board board, int depth, Evaluator evaluator, Move lastMove) {
+		if(lastMove == null) {
+			lastMove = new Move();
+		} else {
+			int win = WinChecker.isWin(board, lastMove.column);
+			if(win != 0 && win != 1) {
+				lastMove.score = winMap[win + 5];
+				return lastMove;
+			}else if(depth == 0) {
+				lastMove.score = evaluator.evaluate(board, lastMove.column);
+				return lastMove;
+			}
+		}
+		
 		Move move = new Move();
 		int numMoves = board.getWidth();
 		int val;
@@ -99,15 +107,11 @@ public class AI {
 			if(board.getTop(i) == board.getHeight()) {
 				continue;
 			}
+			
 			board.drop(i, Board.BLUE);
-			int win = WinChecker.isWin(board, i);
-			if(win != 0 && win != 1) {
-				val = winMap[win + 5];
-			}else if(depth == 0) {
-				val = evaluator.evaluate(board, i);
-			} else {
-				val = max(board, depth-1, evaluator).score;
-			}
+			lastMove.piece = Board.BLUE;
+			lastMove.column = i;
+			val = max(board, depth-1, evaluator, lastMove).score;
 			board.remove(i);
 			if(val < best) {
 				best = val;
@@ -115,21 +119,11 @@ public class AI {
 				move.score = best;
 				move.piece = Board.BLUE;
 			}
-		}
-		
-		for(int i=0; i<numMoves; i++) {
-			if(board.getTop(i) == board.getHeight()) {
-				continue;
-			}
+			
 			board.drop(i, Board.GREEN);
-			int win = WinChecker.isWin(board, i);
-			if(win != 0 && win != 1) {
-				val = winMap[win + 5];
-			}else if(depth == 0) {
-				val = evaluator.evaluate(board, i);
-			} else {
-				val = max(board, depth-1, evaluator).score;
-			}
+			lastMove.piece = Board.GREEN;
+			lastMove.column = i;
+			val = max(board, depth-1, evaluator, lastMove).score;
 			board.remove(i);
 			if(val < best) {
 				best = val;
