@@ -38,6 +38,11 @@ public class AdvancedColumnEvaluator implements Evaluator {
 		
 		for(int i=0; i<columns; i++) {
 			top = board.getTop(i);
+			if(scores[i][rows + 1] == 0) {
+				safeSpots += rows - top;
+				continue;
+			}
+			
 			lastScore = scores[i][top];
 			for(int j=top + 1; j<rows && j-top<doubleHeight; j++) {
 				tmpScore =  scores[i][j];
@@ -69,17 +74,27 @@ public class AdvancedColumnEvaluator implements Evaluator {
 		int type = safeSpots & 1;
 		int height = 1;
 		for(int i=0; i<columns; i++) {
+			if(scores[i][rows + 1] == 0) {
+				continue;
+			}
 			top = board.getTop(i);
 			height = 1;
 			for(int j=top + 1; j<rows; j++) {
-				if(scores[i][j] > 0 && (height & 1) != type) {
-					score += scores[i][j];
-					break;
-				} else if(scores[i][j] < 0 && (height & 1) == type) {
-					score += scores[i][j];
-					break;
+				if(scores[i][j] > 0) {
+					if((height & 1) != type) {
+						score += scores[i][j] << 3;
+						break;
+					} else {
+						score += scores[i][j];
+					}
+				} else if(scores[i][j] < 0) {
+					if((height & 1) == type) {
+						score += scores[i][j] << 3;
+						break;
+					} else {
+						score += scores[i][j];
+					}
 				}
-				height++;
 			}
 		}
 		

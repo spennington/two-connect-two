@@ -28,18 +28,18 @@ public class FutureWinEvaluator implements Evaluator {
 		
 		int height = board.getHeight();
 		
-		//TODO: need to weight the height or something. Even if there is a win at the bottom 
-		//of a column we should still consider the top
 		for(int i=0; i<columns; i++) {
+			if(scores[i][rows + 1] == 0) {
+				continue;
+			}
 			for(int j=board.getTop(i); j<rows-1 && j - board.getTop(i)<height; j++) {
 				if(scores[i][j] != 0) {
 					if((scores[i][j] > 0 && scores[i][j+1] > 0) || (scores[i][j] < 0 && scores[i][j+1] < 0)) {
-						score += scores[i][j] * 100;
 						height = j - board.getTop(i);
+						score = scores[i][j] * 100 * (board.getHeight() - height);
 						break;
 					} else {
-						score += scores[i][j];
-						break;
+						score += scores[i][j] * ((board.getHeight() - j - board.getTop(i)) * 5);
 					}
 				}
 			}

@@ -284,11 +284,12 @@ public class ColumnWinSearcher {
 		int rows = board.getHeight();
 		
 		//padding to prevent out of bounds when getting score of full column
-		int[][] scores = new int[columns][rows + 1];
+		int[][] scores = new int[columns][rows + 2];
 		
 		for(int i=0; i<columns; i++) {
 			for(int j=board.getTop(i); j<rows; j++) {
 				scores[i][j] = isWin(board, i, j);
+				scores[i][rows + 1] |= scores[i][j];
 			}
 		}
 		
