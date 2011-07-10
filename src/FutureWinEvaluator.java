@@ -274,7 +274,8 @@ public class FutureWinEvaluator implements Evaluator {
 		//if winValues contains a win we have a tie.
 		//if winValues contains no wins the maxMap will
 		//give a score of 0 indicating no winner
-		if(total == 0 || ((winValues & maxMask[0]) > 0 && (winValues & maxMask[1]) > 0)) {
+		if(total == 0 && (winValues != 1 << 5)) {
+			//Return 0 because ties are of no value for a future win
 			return 0;
 		} else {
 			//Mask winValues so we only consider relevant bits, then look
@@ -300,7 +301,6 @@ public class FutureWinEvaluator implements Evaluator {
 		
 		for(int i=0; i<columns; i++) {
 			for(int j=board.getTop(i); j<rows; j++) {
-				//TODO:careful of ties
 				scores[i][j] = isWin(board, i, j);
 			}
 		}
