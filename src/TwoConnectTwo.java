@@ -24,17 +24,7 @@ public class TwoConnectTwo {
 		Board board = IO.parseBoard(gameState.numCols, gameState.numRows);
 		IO.close();
 		
-		boolean playerOne = (board.getPieceCount() & 1) == 0;
-		int myTime;
-		int theirTime;
-		
-		if(playerOne) {
-			myTime = gameState.playerOneTime;
-			theirTime = gameState.gameTime - gameState.playerOneTime;
-		} else {
-			theirTime = gameState.playerOneTime;
-			myTime = gameState.gameTime - gameState.playerOneTime;
-		}
+		int theirTime = gameState.gameTime - gameState.playerOneTime;
 		
 		boolean takeMax = theirTime >= 10*MILLIS_IN_MIN;
 		int timeAllowed = takeMax ? MAX_TIME - TIME_BUFFER : IDEAL_TIME;
@@ -52,7 +42,7 @@ public class TwoConnectTwo {
 				System.err.println("calyspo-" + depth);
 				move = AI.minMax(board, depth, evaluator);
 				taken = System.currentTimeMillis() - startTime;
-				if(move.score > 50) {
+				if(move.score > 30) {
 					System.err.println("calypso getting in trouble");
 					depth++;
 					evaluator = ConsecutivePieceEvaluator.getInstance();
