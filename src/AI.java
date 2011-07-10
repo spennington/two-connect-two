@@ -7,11 +7,26 @@
  */
 public class AI {
 	private static int[] winMap = new int[11];
+	private static int[][] columnMap = {
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+			{1, 0, 2, 0, 0, 0, 0, 0, 0, 0},
+			{1, 2, 0, 3, 0, 0, 0, 0, 0, 0},
+			{1, 2, 0, 3, 4, 0, 0, 0, 0, 0},
+			{2, 3, 1, 4, 0, 5, 0, 0, 0, 0},
+			{2, 3, 1, 4, 0, 5, 6, 0, 0, 0},
+			{3, 4, 2, 5, 1, 6, 0, 7, 0, 0},
+			{3, 4, 2, 5, 1, 6, 0, 7, 8, 0},
+			{4, 5, 3, 6, 2, 7, 1, 8, 0, 9}
+	};
 	
 	static {
 		winMap[0] = Integer.MIN_VALUE + 1;
 		winMap[1] = Integer.MIN_VALUE + 2;
 		winMap[2] = Integer.MIN_VALUE + 3;
+		
+		winMap[6] = 0;
 		
 		winMap[10] = Integer.MAX_VALUE - 1;
 		winMap[9] = Integer.MAX_VALUE - 2;
@@ -39,7 +54,7 @@ public class AI {
 
 	private static Move max(Board board, int depth, Evaluator evaluator, Move lastMove, Move alpha, Move beta) {
 		int win = WinChecker.isWin(board, lastMove.column);
-		if(win != 0 && win != 1) {
+		if(win != 0) {
 			lastMove.score = winMap[win + 5];
 			return lastMove;
 		}else if(depth == 0) {
@@ -50,34 +65,35 @@ public class AI {
 		int numMoves = board.getWidth();
 		Move val;
 		for(int i=0; i<numMoves; i++) {
-			if(board.getTop(i) == board.getHeight()) {
+			int column = columnMap[numMoves][i];
+			if(board.getTop(column) == board.getHeight()) {
 				continue;
 			}
 			
-			board.drop(i, Board.RED);
+			board.drop(column, Board.RED);
 			lastMove.piece = Board.RED;
-			lastMove.column = i;
+			lastMove.column = column;
 			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
-			board.remove(i);
+			board.remove(column);
 			if(val.score > alpha.score) {
 				alpha.score = val.score;
 				alpha.piece = Board.RED;
-				alpha.column = i;
+				alpha.column = column;
 			}
 			
 			if(alpha.score >= beta.score) {
 				return alpha;
 			}
 			
-			board.drop(i, Board.GREEN);
+			board.drop(column, Board.GREEN);
 			lastMove.piece = Board.GREEN;
-			lastMove.column = i;
+			lastMove.column = column;
 			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
-			board.remove(i);
+			board.remove(column);
 			if(val.score > alpha.score) {
 				alpha.score = val.score;
 				alpha.piece = Board.GREEN;
-				alpha.column = i;
+				alpha.column = column;
 			}
 			
 			if(alpha.score >= beta.score) {
@@ -93,7 +109,7 @@ public class AI {
 			lastMove = new Move();
 		} else {
 			int win = WinChecker.isWin(board, lastMove.column);
-			if(win != 0 && win != 1) {
+			if(win != 0) {
 				lastMove.score = winMap[win + 5];
 				return lastMove;
 			}else if(depth == 0) {
@@ -105,34 +121,35 @@ public class AI {
 		int numMoves = board.getWidth();
 		Move val;
 		for(int i=0; i<numMoves; i++) {
-			if(board.getTop(i) == board.getHeight()) {
+			int column = columnMap[numMoves][i];
+			if(board.getTop(column) == board.getHeight()) {
 				continue;
 			}
 			
-			board.drop(i, Board.BLUE);
+			board.drop(column, Board.BLUE);
 			lastMove.piece = Board.BLUE;
-			lastMove.column = i;
+			lastMove.column = column;
 			val = max(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
-			board.remove(i);
+			board.remove(column);
 			if(val.score < beta.score) {
 				beta.score = val.score;
 				beta.piece = Board.BLUE;
-				beta.column = i;
+				beta.column = column;
 			}
 			
 			if(alpha.score >= beta.score) {
 				return beta;
 			}
 			
-			board.drop(i, Board.GREEN);
+			board.drop(column, Board.GREEN);
 			lastMove.piece = Board.GREEN;
-			lastMove.column = i;
+			lastMove.column = column;
 			val = max(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
-			board.remove(i);
+			board.remove(column);
 			if(val.score < beta.score) {
 				beta.score = val.score;
 				beta.piece = Board.GREEN;
-				beta.column = i;
+				beta.column = column;
 			}
 			
 			if(alpha.score >= beta.score) {
