@@ -47,13 +47,16 @@ public class TwoConnectTwo {
 		} else {
 			int depth = START_DEPTH;
 			long taken = System.currentTimeMillis() - startTime;
-			while(taken < timeAllowed){
-				Evaluator evaluator = ChainEvaluator.getInstance();
+			Evaluator evaluator = ChainEvaluator.getInstance();
+			for(; taken * 10 < timeAllowed; depth++){
+				System.err.println("calyspo-" + depth);
 				move = AI.minMax(board, depth, evaluator);
 				taken = System.currentTimeMillis() - startTime;
-				if(taken * 20 < timeAllowed) {
+				if(move.score > 50) {
+					System.err.println("calypso getting in trouble");
 					depth++;
-					System.err.println("calyspo+");
+					evaluator = ConsecutivePieceEvaluator.getInstance();
+					timeAllowed = Math.max(timeAllowed, MILLIS_IN_MIN << 1);
 				}
 			}
 		}
