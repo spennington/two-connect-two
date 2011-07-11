@@ -19,7 +19,7 @@ public class AdvancedChainEvaluator implements Evaluator {
 	 */
 	@Override
 	public int evaluate(Board board, int lastCol) {
-		return advancedColumnEvaluator.evaluate(board, lastCol) * 30 + consecutivePieceEvaluator.evaluate(board, lastCol);
+		return advancedColumnEvaluator.evaluate(board, lastCol) + 10 * consecutivePieceEvaluator.evaluate(board, lastCol);
 	}
 
 }

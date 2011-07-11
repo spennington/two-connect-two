@@ -10,8 +10,9 @@
 public class AdvancedColumnEvaluator implements Evaluator {
 	
 	private static AdvancedColumnEvaluator instance = new AdvancedColumnEvaluator();
-
 	
+	private static int[] heightMap = {100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
+
 	private AdvancedColumnEvaluator() {}
 	
 	public static Evaluator getInstance() {
@@ -82,19 +83,18 @@ public class AdvancedColumnEvaluator implements Evaluator {
 			for(int j=top + 1; j<rows; j++) {
 				if(scores[i][j] > 0) {
 					if((height & 1) != type) {
-						score += scores[i][j] << 3;
-						break;
+						score += scores[i][j] * 10 * heightMap[height];
 					} else {
-						score += scores[i][j];
+						score += scores[i][j] * heightMap[height];
 					}
 				} else if(scores[i][j] < 0) {
 					if((height & 1) == type) {
-						score += scores[i][j] << 3;
-						break;
+						score += scores[i][j] * 10 * heightMap[height];
 					} else {
-						score += scores[i][j];
+						score += scores[i][j] * heightMap[height];
 					}
 				}
+				height++;
 			}
 		}
 		
