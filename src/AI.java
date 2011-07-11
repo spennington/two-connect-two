@@ -56,6 +56,7 @@ public class AI {
 		int win = WinChecker.isWin(board, lastMove.column);
 		if(win != 0) {
 			lastMove.score = winMap[win + 5];
+			lastMove.isWin = true;
 			return lastMove;
 		}else if(depth == 0) {
 			lastMove.score = evaluator.evaluate(board, lastMove.column);
