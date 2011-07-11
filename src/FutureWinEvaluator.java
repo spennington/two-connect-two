@@ -36,10 +36,11 @@ public class FutureWinEvaluator implements Evaluator {
 				if(scores[i][j] != 0) {
 					if((scores[i][j] > 0 && scores[i][j+1] > 0) || (scores[i][j] < 0 && scores[i][j+1] < 0)) {
 						height = j - board.getTop(i);
-						score = scores[i][j] * 100 * (board.getHeight() - height);
+						score += scores[i][j] * 100;
 						break;
 					} else {
-						score += scores[i][j] * ((board.getHeight() - j - board.getTop(i)) * 5);
+						score += scores[i][j];
+						break;
 					}
 				}
 			}
