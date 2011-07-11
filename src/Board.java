@@ -151,4 +151,16 @@ public class Board implements Cloneable {
 	public int getPieceCount() {
 		return pieceCount;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
+	@Override
+	protected Board clone() {
+		Board clone = new Board(this.width, this.height);
+		clone.pieceCount = this.pieceCount;
+		clone.pieces = this.pieces.clone();
+		clone.tops = this.tops.clone();
+		return clone;
+	}
 }
