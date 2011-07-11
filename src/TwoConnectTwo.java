@@ -4,13 +4,10 @@
  */
 public class TwoConnectTwo {
 
-	private static final int EARLY_PIECE_COUNT  = 20;
-	private static final int EARLY_DEPTH = 5;
 	private static final int BRUTE_FORCE_DEPTH = 17;
 	private static final int START_DEPTH = 6;
 	private static final int MILLIS_IN_MIN = 60000;
 	private static final int MILLIS_IN_SEC = 1000;
-	private static final int IDEAL_TIME = 15 * MILLIS_IN_SEC;
 	private static final int MAX_TIME = 3 * MILLIS_IN_MIN;
 	private static final int TIME_BUFFER = 30 * MILLIS_IN_SEC;
 	
@@ -37,24 +34,22 @@ public class TwoConnectTwo {
 		int piecesRemaining = board.getWidth() * board.getHeight() - board.getPieceCount();
 		int timeAllowed = takeMax ? MAX_TIME - TIME_BUFFER : (MILLIS_IN_MIN * 10 - gameState.playerOneTime) / (piecesRemaining>>1);
 		
-		Evaluator evaluator = ChainEvaluator.getInstance();
+		Evaluator evaluator = AdvancedChainEvaluator.getInstance();
 		
 		if(piecesRemaining <= BRUTE_FORCE_DEPTH) {
 			move = AI.minMax(board, piecesRemaining, WinEvaluator.getInstance());
-		} else if(board.getPieceCount() < EARLY_PIECE_COUNT) {
-			move = AI.minMax(board, EARLY_DEPTH, evaluator);
-			if(move.score > 100) {
-				System.err.println("calyspo in trouble");
-				move = AI.minMax(board, 8, evaluator);
-			}
 		} else {
 			int depth = START_DEPTH;
 			long taken = System.currentTimeMillis() - startTime;
-			for(; taken * 2 < timeAllowed; depth++){
+			for(; taken * 4 < timeAllowed; depth++) {
 				System.err.println("calyspo-" + depth);
 				move = AI.minMax(board, depth, evaluator);
+				System.err.println("score=" + move.score);
 				timeout.setMove(move);
 				taken = System.currentTimeMillis() - startTime;
+				if(move.isWin && move.score < 0) {
+					break;
+				}
 			}
 		}
 		
