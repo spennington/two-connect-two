@@ -68,7 +68,7 @@ public class AdvancedColumnEvaluator implements Evaluator {
 		}
 		
 		if(doubleHeight != Integer.MAX_VALUE) {
-			return (rows - doubleHeight) * 1000 * factor;
+			return (rows - doubleHeight) * 100000 * factor;
 		}
 		
 		//0 if even 1 if odd
