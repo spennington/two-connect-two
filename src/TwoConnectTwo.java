@@ -27,6 +27,7 @@ public class TwoConnectTwo {
 		
 		TimeoutThread timeout = new TimeoutThread();
 		timeout.setTimeout(MAX_TIME - TIME_BUFFER);
+		timeout.setBoard(board.clone());
 		timeout.start();
 		
 		int theirTime = gameState.gameTime - gameState.playerOneTime;
@@ -41,10 +42,10 @@ public class TwoConnectTwo {
 		} else {
 			int depth = START_DEPTH;
 			long taken = System.currentTimeMillis() - startTime;
-			for(; taken * 4 < timeAllowed; depth++) {
+			for(; taken * 4 < timeAllowed && depth < piecesRemaining; depth++) {
 				System.err.println("calyspo-" + depth);
 				move = AI.minMax(board, depth, evaluator);
-				System.err.println("score=" + move.score);
+				System.err.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + "): score=" + move.score);
 				timeout.setMove(move);
 				taken = System.currentTimeMillis() - startTime;
 				if(move.isWin && move.score < 0) {
@@ -66,6 +67,7 @@ public class TwoConnectTwo {
 		private Move move;
 		private long timeout;
 		private boolean kill = false;
+		private Board board;
 		
 		public void run() {
 			long start = System.currentTimeMillis();
@@ -80,14 +82,17 @@ public class TwoConnectTwo {
 			
 			if(!kill) {
 				System.err.println("Timeout");
-				if(move != null) {
-					System.out.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + ")");
-				} else {
-					System.out.println("(1, b)");
+				if(move == null) {
+					move = AI.minMax(board, 4, ConsecutivePieceEvaluator.getInstance());
 				}
+				System.out.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + ")");
 			}
 		}
 		
+		public void setBoard(Board board) {
+			this.board = board;
+		}
+
 		public void setTimeout(long timeout) {
 			this.timeout = timeout;
 		}
