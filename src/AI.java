@@ -6,6 +6,8 @@
  *
  */
 public class AI {
+	
+	private static MinComparator minComparator = new MinComparator();
 	private static int[] winMap = new int[11];
 	private static int[][] columnMap = {
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -49,17 +51,20 @@ public class AI {
 	 * @return "Best" move to make given the current game state
 	 */
 	public static Move minMax(Board board, int depth, Evaluator evaluator) {
-		return min(board, depth, evaluator, null, new Move(0, Integer.MIN_VALUE, Board.RED), new Move(0, Integer.MAX_VALUE, Board.BLUE));
+		return min(board, depth, evaluator, null, new Move(0, Integer.MIN_VALUE, Board.RED), new Move(0, Integer.MAX_VALUE, Board.BLUE), depth);
 	}
 
-	private static Move max(Board board, int depth, Evaluator evaluator, Move lastMove, Move alpha, Move beta) {
+	private static Move max(Board board, int depth, Evaluator evaluator, Move lastMove, Move alpha, Move beta, int startDepth) {
 		int win = WinChecker.isWin(board, lastMove.column);
 		if(win != 0) {
 			lastMove.score = winMap[win + 5];
+			lastMove.depth = startDepth - depth;
 			lastMove.isWin = true;
 			return lastMove;
 		}else if(depth == 0) {
 			lastMove.score = evaluator.evaluate(board, lastMove.column);
+			lastMove.depth = startDepth - depth;
+			lastMove.isWin = false;
 			return lastMove;
 		}
 			
@@ -74,30 +79,34 @@ public class AI {
 			board.drop(column, Board.RED);
 			lastMove.piece = Board.RED;
 			lastMove.column = column;
-			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
+			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone(), startDepth);
 			board.remove(column);
-			if(val.score > alpha.score) {
-				alpha.score = val.score;
+			if(minComparator.compare(val, alpha) > 0) {
+				alpha.copy(val);
 				alpha.piece = Board.RED;
 				alpha.column = column;
 			}
 			
-			if(alpha.score >= beta.score) {
+			//This should be the comparator that min uses
+			//For now the are the same so this is fine
+			if(minComparator.compare(alpha, beta) >= 0) {
 				return alpha;
 			}
 			
 			board.drop(column, Board.GREEN);
 			lastMove.piece = Board.GREEN;
 			lastMove.column = column;
-			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
+			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone(), startDepth);
 			board.remove(column);
-			if(val.score > alpha.score) {
-				alpha.score = val.score;
+			if(minComparator.compare(val, alpha) > 0) {
+				alpha.copy(val);
 				alpha.piece = Board.GREEN;
 				alpha.column = column;
 			}
 			
-			if(alpha.score >= beta.score) {
+			//This should be the comparator that min uses
+			//For now the are the same so this is fine
+			if(minComparator.compare(alpha, beta) >= 0) {
 				return alpha;
 			}
 		}
@@ -105,16 +114,20 @@ public class AI {
 		return alpha;
 	}
 
-	private static Move min(Board board, int depth, Evaluator evaluator, Move lastMove, Move alpha, Move beta) {
+	private static Move min(Board board, int depth, Evaluator evaluator, Move lastMove, Move alpha, Move beta, int startDepth) {
 		if(lastMove == null) {
 			lastMove = new Move();
 		} else {
 			int win = WinChecker.isWin(board, lastMove.column);
 			if(win != 0) {
 				lastMove.score = winMap[win + 5];
+				lastMove.depth = startDepth - depth;
+				lastMove.isWin = true;
 				return lastMove;
 			}else if(depth == 0) {
 				lastMove.score = evaluator.evaluate(board, lastMove.column);
+				lastMove.depth = startDepth - depth;
+				lastMove.isWin = false;
 				return lastMove;
 			}
 		}
@@ -130,30 +143,34 @@ public class AI {
 			board.drop(column, Board.BLUE);
 			lastMove.piece = Board.BLUE;
 			lastMove.column = column;
-			val = max(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
+			val = max(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone(), startDepth);
 			board.remove(column);
-			if(val.score < beta.score) {
-				beta.score = val.score;
+			if(minComparator.compare(val, beta) < 0) {			
+				beta.copy(val);
 				beta.piece = Board.BLUE;
 				beta.column = column;
 			}
 			
-			if(alpha.score >= beta.score) {
+			//This should be the comparator that max uses
+			//For now the are the same so this is fine
+			if(minComparator.compare(alpha, beta) >= 0) {
 				return beta;
 			}
 			
 			board.drop(column, Board.GREEN);
 			lastMove.piece = Board.GREEN;
 			lastMove.column = column;
-			val = max(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone());
+			val = max(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone(), startDepth);
 			board.remove(column);
-			if(val.score < beta.score) {
-				beta.score = val.score;
+			if(minComparator.compare(val, beta) < 0) {	
+				beta.copy(val);
 				beta.piece = Board.GREEN;
 				beta.column = column;
 			}
 			
-			if(alpha.score >= beta.score) {
+			//This should be the comparator that max uses
+			//For now the are the same so this is fine
+			if(minComparator.compare(alpha, beta) >= 0) {
 				return beta;
 			}
 		}
