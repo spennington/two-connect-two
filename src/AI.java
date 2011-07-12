@@ -8,6 +8,7 @@
 public class AI {
 	
 	private static MinComparator minComparator = new MinComparator();
+	private static MaxComparator maxComparator = new MaxComparator();
 	private static int[] winMap = new int[11];
 	private static int[][] columnMap = {
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -81,14 +82,13 @@ public class AI {
 			lastMove.column = column;
 			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone(), startDepth);
 			board.remove(column);
-			if(minComparator.compare(val, alpha) > 0) {
+			if(maxComparator.compare(val, alpha) > 0) {
 				alpha.copy(val);
 				alpha.piece = Board.RED;
 				alpha.column = column;
 			}
 			
 			//This should be the comparator that min uses
-			//For now the are the same so this is fine
 			if(minComparator.compare(alpha, beta) >= 0) {
 				return alpha;
 			}
@@ -98,14 +98,13 @@ public class AI {
 			lastMove.column = column;
 			val = min(board, depth-1, evaluator, lastMove, alpha.clone(), beta.clone(), startDepth);
 			board.remove(column);
-			if(minComparator.compare(val, alpha) > 0) {
+			if(maxComparator.compare(val, alpha) > 0) {
 				alpha.copy(val);
 				alpha.piece = Board.GREEN;
 				alpha.column = column;
 			}
 			
 			//This should be the comparator that min uses
-			//For now the are the same so this is fine
 			if(minComparator.compare(alpha, beta) >= 0) {
 				return alpha;
 			}
@@ -153,7 +152,7 @@ public class AI {
 			
 			//This should be the comparator that max uses
 			//For now the are the same so this is fine
-			if(minComparator.compare(alpha, beta) >= 0) {
+			if(maxComparator.compare(alpha, beta) >= 0) {
 				return beta;
 			}
 			
@@ -170,7 +169,7 @@ public class AI {
 			
 			//This should be the comparator that max uses
 			//For now the are the same so this is fine
-			if(minComparator.compare(alpha, beta) >= 0) {
+			if(maxComparator.compare(alpha, beta) >= 0) {
 				return beta;
 			}
 		}
