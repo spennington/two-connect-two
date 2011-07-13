@@ -11,5 +11,5 @@ public interface Evaluator {
 	 * 		Column in which the last piece was played
 	 * @return Score of the board
 	 */
-	public int evaluate(Board board, int lastCol);
+	public int evaluate(Board board, int lastCol, byte next);
 }

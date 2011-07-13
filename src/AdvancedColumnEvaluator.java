@@ -20,10 +20,10 @@ public class AdvancedColumnEvaluator implements Evaluator {
 	}
 
 	/* (non-Javadoc)
-	 * @see Evaluator#evaluate(Board, int)
+	 * @see Evaluator#evaluate(Board, int)s
 	 */
 	@Override
-	public int evaluate(Board board, int lastCol) {
+	public int evaluate(Board board, int lastCol, byte next) {
 		int columns = board.getWidth();
 		int rows = board.getHeight();
 		
@@ -36,6 +36,8 @@ public class AdvancedColumnEvaluator implements Evaluator {
 		int tmpScore = 0;
 		int top = 0;
 		int lastScore = 0;
+		boolean seenMax;
+		boolean seenMin;
 		
 		for(int i=0; i<columns; i++) {
 			top = board.getTop(i);
@@ -45,25 +47,30 @@ public class AdvancedColumnEvaluator implements Evaluator {
 			}
 			
 			lastScore = scores[i][top];
+			if((lastScore < 0 && next == Board.BLUE) || (lastScore > 0 && next == Board.RED)) {
+				return lastScore * 10000000;
+			}
+			
+			seenMax = lastScore > 0;
+			seenMin = lastScore < 0;
 			for(int j=top + 1; j<rows && j-top<doubleHeight; j++) {
-				tmpScore =  scores[i][j];
+				tmpScore = scores[i][j];
 				if(lastScore != 0) {
-					if(lastScore < 0 && tmpScore < 0) {
+					if((tmpScore < 0 && seenMax) || (tmpScore > 0 && seenMin) || (seenMax && seenMin)) {
+						break;
+					} else if(lastScore < 0 && tmpScore < 0) {
 						doubleHeight = j - board.getTop(i);
 						factor = -1;
 					} else if(lastScore > 0 && tmpScore > 0) {
 						doubleHeight = j - board.getTop(i);
 						factor = 1;
 					}
-					break;
-				} else if(tmpScore == 0) {
+				} else if(tmpScore == 0 && !seenMax && ! seenMin) {
 					safeSpots++;
-				} else {
-					lastScore = tmpScore;
 				}
-			}
-			if(lastScore == 0 && top != rows) {
-				safeSpots++;
+				lastScore = tmpScore;
+				seenMax |= lastScore > 0;
+				seenMin |= lastScore < 0;
 			}
 		}
 		
@@ -74,27 +81,55 @@ public class AdvancedColumnEvaluator implements Evaluator {
 		//0 if even 1 if odd
 		int type = safeSpots & 1;
 		int height = 1;
-		for(int i=0; i<columns; i++) {
-			if(scores[i][rows + 1] == 0) {
-				continue;
-			}
-			top = board.getTop(i);
-			height = 1;
-			for(int j=top + 1; j<rows; j++) {
-				if(scores[i][j] > 0) {
-					if((height & 1) != type) {
-						score += scores[i][j] * 10 * heightMap[height];
-					} else {
-						score += scores[i][j] * heightMap[height];
-					}
-				} else if(scores[i][j] < 0) {
-					if((height & 1) == type) {
-						score += scores[i][j] * 10 * heightMap[height];
-					} else {
-						score += scores[i][j] * heightMap[height];
-					}
+		//What about wins at height 0???
+		
+		if(next == Board.BLUE) {
+			for(int i=0; i<columns; i++) {
+				if(scores[i][rows + 1] == 0) {
+					continue;
 				}
-				height++;
+				top = board.getTop(i);
+				height = 1;
+				for(int j=top + 1; j<rows; j++) {
+					if(scores[i][j] > 0) {
+						if((height & 1) != type) {
+							score += scores[i][j] * 10 * heightMap[height];
+						} else {
+							score += scores[i][j] * heightMap[height];
+						}
+					} else if(scores[i][j] < 0) {
+						if((height & 1) == type) {
+							score += scores[i][j] * 10 * heightMap[height];
+						} else {
+							score += scores[i][j] * heightMap[height];
+						}
+					}
+					height++;
+				}
+			}
+		} else {
+			for(int i=0; i<columns; i++) {
+				if(scores[i][rows + 1] == 0) {
+					continue;
+				}
+				top = board.getTop(i);
+				height = 1;
+				for(int j=top + 1; j<rows; j++) {
+					if(scores[i][j] > 0) {
+						if((height & 1) == type) {
+							score += scores[i][j] * 10 * heightMap[height];
+						} else {
+							score += scores[i][j] * heightMap[height];
+						}
+					} else if(scores[i][j] < 0) {
+						if((height & 1) != type) {
+							score += scores[i][j] * 10 * heightMap[height];
+						} else {
+							score += scores[i][j] * heightMap[height];
+						}
+					}
+					height++;
+				}
 			}
 		}
 		

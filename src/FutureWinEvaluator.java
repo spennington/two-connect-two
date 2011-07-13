@@ -19,7 +19,7 @@ public class FutureWinEvaluator implements Evaluator {
 	 * @see Evaluator#evaluate(Board, int)
 	 */
 	@Override
-	public int evaluate(Board board, int lastCol) {
+	public int evaluate(Board board, int lastCol, byte next) {
 		int columns = board.getWidth();
 		int rows = board.getHeight();
 		

@@ -63,7 +63,7 @@ public class AI {
 			lastMove.isWin = true;
 			return lastMove;
 		}else if(depth == 0) {
-			lastMove.score = evaluator.evaluate(board, lastMove.column);
+			lastMove.score = evaluator.evaluate(board, lastMove.column, Board.RED);
 			lastMove.depth = startDepth - depth;
 			lastMove.isWin = false;
 			return lastMove;
@@ -124,7 +124,7 @@ public class AI {
 				lastMove.isWin = true;
 				return lastMove;
 			}else if(depth == 0) {
-				lastMove.score = evaluator.evaluate(board, lastMove.column);
+				lastMove.score = evaluator.evaluate(board, lastMove.column, Board.BLUE);
 				lastMove.depth = startDepth - depth;
 				lastMove.isWin = false;
 				return lastMove;

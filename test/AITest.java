@@ -163,7 +163,7 @@ public class AITest {
 	public void preventFutureLoss6() {
 		//Trogdor Jul 11 2011 7PM
 		Board board = TestUtils.generateBoard("s,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s,r,b,r,s,s,s,s,s,g,s,s,s,s,s,s,s,r,r,b,r,b,s,s,s,b,b,r,b,s,s,s,s,g,b,b,r,r,s,s,s,b,r,r,s,s,s,s,s,r,b,s,s,s,s,s,s,g,s,s,s,s,s,s,s", 10, 8);
-		Move move = AI.minMax(board, 6, advancedChainEvaluator);
+		Move move = AI.minMax(board, 7, advancedChainEvaluator);
 		assertTrue(move.column != 1);
 	}
 	

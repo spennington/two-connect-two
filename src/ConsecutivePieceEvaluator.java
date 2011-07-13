@@ -223,7 +223,7 @@ public class ConsecutivePieceEvaluator implements Evaluator {
 	 * @see Evaluator#evaluate(calypso.twoconnecttwo.Board, int)
 	 */
 	@Override
-	public int evaluate(Board board, int lastCol) {
+	public int evaluate(Board board, int lastCol, byte next) {
 		int score = 0;
 		
 		//Horizontal

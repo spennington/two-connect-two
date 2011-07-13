@@ -18,8 +18,8 @@ public class ChainEvaluator implements Evaluator {
 	 * @see Evaluator#evaluate(calypso.twoconnecttwo.Board, int)
 	 */
 	@Override
-	public int evaluate(Board board, int lastCol) {
-		return futureWin.evaluate(board, lastCol) * 10 + winningCombos.evaluate(board, lastCol);
+	public int evaluate(Board board, int lastCol, byte next) {
+		return futureWin.evaluate(board, lastCol, next) * 10 + winningCombos.evaluate(board, lastCol, next);
 	}
 
 }

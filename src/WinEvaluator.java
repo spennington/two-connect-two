@@ -19,7 +19,7 @@ public class WinEvaluator implements Evaluator{
 	 * @see Evaluator#evaluate(Board)
 	 */
 	@Override
-	public int evaluate(Board board, int lastCol) {
+	public int evaluate(Board board, int lastCol, byte next) {
 		return WinChecker.isWin(board, lastCol);
 	}
 }

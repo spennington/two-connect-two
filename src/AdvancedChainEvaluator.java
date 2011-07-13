@@ -18,8 +18,8 @@ public class AdvancedChainEvaluator implements Evaluator {
 	 * @see Evaluator#evaluate(calypso.twoconnecttwo.Board, int)
 	 */
 	@Override
-	public int evaluate(Board board, int lastCol) {
-		return advancedColumnEvaluator.evaluate(board, lastCol) + 200 * consecutivePieceEvaluator.evaluate(board, lastCol);
+	public int evaluate(Board board, int lastCol, byte next) {
+		return advancedColumnEvaluator.evaluate(board, lastCol, next) + 200 * consecutivePieceEvaluator.evaluate(board, lastCol, next);
 	}
 
 }

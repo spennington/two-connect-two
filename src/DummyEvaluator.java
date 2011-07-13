@@ -20,7 +20,7 @@ private static DummyEvaluator instance = new DummyEvaluator();
 	 * @see Evaluator#evaluate(Board)
 	 */
 	@Override
-	public int evaluate(Board board, int lastCol) {
+	public int evaluate(Board board, int lastCol, byte next) {
 		return 0;
 	}
 
