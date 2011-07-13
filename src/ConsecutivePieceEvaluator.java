@@ -13,6 +13,21 @@ public class ConsecutivePieceEvaluator implements Evaluator {
 	private static ConsecutivePieceEvaluator instance = new ConsecutivePieceEvaluator();
 	
 	private ConsecutivePieceEvaluator() {
+		//SS	0
+		
+		//SR	1
+		//RS	4
+		//RR	5
+		
+		//SB	2
+		//BS	8
+		//BB	A
+		
+		//SG	3
+		//GS	C
+		//GG	F
+		
+		
 		//RSSS
 		comboMap[0x40] = 1;
 		//SRSS
@@ -71,7 +86,7 @@ public class ConsecutivePieceEvaluator implements Evaluator {
 		//GRRS
 		comboMap[0xD4] = 15;
 		//SRRG
-		comboMap[0x1D] = 15;
+		comboMap[0x17] = 15;
 		//RGRS
 		comboMap[0x74] = 10;
 		//RSRG
@@ -145,9 +160,9 @@ public class ConsecutivePieceEvaluator implements Evaluator {
 		//SGBS
 		comboMap[0x38] = -8;
 		//GSSB
-		comboMap[0xC3] = -8;
+		comboMap[0xC2] = -8;
 		//SBGS
-		comboMap[0x3C] = -8;
+		comboMap[0x2C] = -8;
 		
 		//BBGS
 		comboMap[0xAC] = -20;

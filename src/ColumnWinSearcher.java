@@ -12,6 +12,19 @@ public class ColumnWinSearcher {
 	private static int[] maxMask = new int[2];
 	
 	static {
+		//SR	1
+		//RS	4
+		//RR	5
+		
+		//SB	2
+		//BS	8
+		//BB	A
+		
+		//SG	3
+		//GS	C
+		//GG	F
+		
+		
 		// Map for all possible scoring combinations
 		//RRGS
 		scoreMap[0x5C] = 5;
@@ -28,7 +41,7 @@ public class ColumnWinSearcher {
 		//GRRS
 		scoreMap[0xD4] = 4;
 		//SRRG
-		scoreMap[0x1D] = 4;
+		scoreMap[0x17] = 4;
 		//RGRS
 		scoreMap[0x74] = 3;
 		//RSRG
