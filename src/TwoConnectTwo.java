@@ -9,7 +9,11 @@ public class TwoConnectTwo {
 	private static final int MILLIS_IN_MIN = 60000;
 	private static final int MILLIS_IN_SEC = 1000;
 	private static final int MAX_TIME = 3 * MILLIS_IN_MIN;
-	private static final int TIME_BUFFER = 30 * MILLIS_IN_SEC;
+	private static final int TIME_BUFFER = 3 * MILLIS_IN_SEC;
+	private static final int MAX_GAME_TIME = 20 * MILLIS_IN_MIN;
+	private static final int EARLY_GAME_FACTOR = 4;
+	private static final int MID_GAME_FACTOR = 3;
+	private static final int LATE_GAME_FACTOR = 2;
 	
 	/**
 	 * Main entry point into the application
@@ -26,7 +30,7 @@ public class TwoConnectTwo {
 		IO.close();
 		
 		TimeoutThread timeout = new TimeoutThread();
-		timeout.setTimeout(MAX_TIME - TIME_BUFFER);
+		timeout.setTimeout(Math.min(MAX_TIME - TIME_BUFFER, MAX_GAME_TIME - gameState.gameTime - TIME_BUFFER < 0 ? 0 : MAX_GAME_TIME - gameState.gameTime - TIME_BUFFER));
 		timeout.setBoard(board.clone());
 		timeout.start();
 		
@@ -34,6 +38,15 @@ public class TwoConnectTwo {
 		boolean takeMax = theirTime >= 10*MILLIS_IN_MIN;
 		int piecesRemaining = board.getWidth() * board.getHeight() - board.getPieceCount();
 		int timeAllowed = takeMax ? MAX_TIME - TIME_BUFFER : (MILLIS_IN_MIN * 10 - gameState.playerOneTime) / (piecesRemaining>>1);
+		int timeFactor;
+		
+		if(board.getPieceCount() < 10) {
+			timeFactor = EARLY_GAME_FACTOR;
+		} else if(board.getPieceCount() < 30) {
+			timeFactor = MID_GAME_FACTOR;
+		} else {
+			timeFactor = LATE_GAME_FACTOR;
+		}
 		
 		Evaluator evaluator = AdvancedChainEvaluator.getInstance();
 		
@@ -42,7 +55,7 @@ public class TwoConnectTwo {
 		} else {
 			int depth = START_DEPTH;
 			long taken = System.currentTimeMillis() - startTime;
-			for(; taken * 4 < timeAllowed && depth < piecesRemaining; depth++) {
+			for(; taken * timeFactor < timeAllowed && depth < piecesRemaining; depth++) {
 				System.err.println("calyspo-" + depth);
 				move = AI.minMax(board, depth, evaluator);
 				System.err.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + "): score=" + move.score);
@@ -83,9 +96,10 @@ public class TwoConnectTwo {
 			if(!kill) {
 				System.err.println("Timeout");
 				if(move == null) {
-					move = AI.minMax(board, 4, ConsecutivePieceEvaluator.getInstance());
+					move = AI.minMax(board, 2, ConsecutivePieceEvaluator.getInstance());
 				}
 				System.out.println("(" + (move.column + 1)+ ", " + IO.pieceMap[move.piece] + ")");
+				System.exit(0);
 			}
 		}
 		
