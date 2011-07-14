@@ -11,7 +11,7 @@ public class AdvancedColumnEvaluator implements Evaluator {
 	
 	private static AdvancedColumnEvaluator instance = new AdvancedColumnEvaluator();
 	
-	private static int[] heightMap = {100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
+	private static int[] heightMap = {200, 90, 80, 70, 60, 50, 40, 30, 20, 10};
 
 	private AdvancedColumnEvaluator() {}
 	
@@ -82,6 +82,7 @@ public class AdvancedColumnEvaluator implements Evaluator {
 		int type = safeSpots & 1;
 		int height = 1;
 		//What about wins at height 0???
+		int columnCount = 0;
 		
 		if(next == Board.BLUE) {
 			for(int i=0; i<columns; i++) {
@@ -90,18 +91,19 @@ public class AdvancedColumnEvaluator implements Evaluator {
 				}
 				top = board.getTop(i);
 				height = 1;
+				columnCount = 0;
 				for(int j=top + 1; j<rows; j++) {
 					if(scores[i][j] > 0) {
 						if((height & 1) != type) {
-							score += scores[i][j] * 10 * heightMap[height];
+							score += scores[i][j] * 10 * heightMap[columnCount++];
 						} else {
-							score += scores[i][j] * heightMap[height];
+							score += scores[i][j] * heightMap[columnCount++];
 						}
 					} else if(scores[i][j] < 0) {
 						if((height & 1) == type) {
-							score += scores[i][j] * 10 * heightMap[height];
+							score += scores[i][j] * 10 * heightMap[columnCount++];
 						} else {
-							score += scores[i][j] * heightMap[height];
+							score += scores[i][j] * heightMap[columnCount++];
 						}
 					}
 					height++;
@@ -114,18 +116,19 @@ public class AdvancedColumnEvaluator implements Evaluator {
 				}
 				top = board.getTop(i);
 				height = 1;
+				columnCount = 0;
 				for(int j=top + 1; j<rows; j++) {
 					if(scores[i][j] > 0) {
 						if((height & 1) == type) {
-							score += scores[i][j] * 10 * heightMap[height];
+							score += scores[i][j] * 10 * heightMap[columnCount++];
 						} else {
-							score += scores[i][j] * heightMap[height];
+							score += scores[i][j] * heightMap[columnCount++];
 						}
 					} else if(scores[i][j] < 0) {
 						if((height & 1) != type) {
-							score += scores[i][j] * 10 * heightMap[height];
+							score += scores[i][j] * 10 * heightMap[columnCount++];
 						} else {
-							score += scores[i][j] * heightMap[height];
+							score += scores[i][j] * heightMap[columnCount++];
 						}
 					}
 					height++;
