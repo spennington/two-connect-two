@@ -106,6 +106,21 @@ public class AITest {
 	}
 	
 	@Test
+	public void futureWin6() {
+		//Odin 6 Jul 13 7AM - Move 42
+		Board board = TestUtils.generateBoard("s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,b,g,b,r,b,b,r,s,r,b,r,b,r,r,b,r,r,b,r,b,r,r,g,b,s,s,s,s,s,s,s,s,b,r,b,g,r,b,r,b,r,b,r,b,r,s,s,s,b,r,s,s,s,s,s,s,b,g,r,s,s,s,s,s", 10, 8);
+		Move move = AI.minMax(board, 6, advancedChainEvaluator);
+		Move move2 = AI.minMax(board, 7, advancedChainEvaluator);
+		Move move3 = AI.minMax(board, 8, advancedChainEvaluator);
+		assertEquals(7, move.column);
+		assertEquals(7, move2.column);
+		assertEquals(7, move3.column);
+		assertEquals(Board.BLUE, move.piece);
+		assertEquals(Board.BLUE, move2.piece);
+		assertEquals(Board.BLUE, move3.piece);
+	}
+	
+	@Test
 	public void winLateGame() {
 		Board board = TestUtils.generateBoard("b,r,b,r,b,r,b,r,s,s,s,s,s,s,s,s,g,b,r,s,s,s,s,s,r,r,b,r,g,r,b,r,b,r,b,r,b,r,b,r,b,b,r,b,b,r,b,r,r,b,r,b,r,b,r,b,r,s,s,s,s,s,s,s,b,r,b,r,b,r,b,r,s,s,s,s,s,s,s,s", 10, 8);
 		Move move = AI.minMax(board, 10, advancedChainEvaluator);
@@ -165,6 +180,21 @@ public class AITest {
 		Board board = TestUtils.generateBoard("s,s,s,s,s,s,s,s,b,s,s,s,s,s,s,s,r,b,r,s,s,s,s,s,g,s,s,s,s,s,s,s,r,r,b,r,b,s,s,s,b,b,r,b,s,s,s,s,g,b,b,r,r,s,s,s,b,r,r,s,s,s,s,s,r,b,s,s,s,s,s,s,g,s,s,s,s,s,s,s", 10, 8);
 		Move move = AI.minMax(board, 7, advancedChainEvaluator);
 		assertTrue(move.column != 1);
+	}
+	
+	@Test
+	public void preventFutureLoss7() {
+		//Odin 5 Jul 13 7AM Move 44
+		Board board = TestUtils.generateBoard("s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,b,b,g,r,r,b,r,s,r,b,r,b,r,r,b,b,r,r,b,g,b,r,b,r,b,r,r,b,s,s,s,s,g,b,r,r,r,s,s,s,r,s,s,s,s,s,s,s,b,b,r,g,g,b,r,s,b,r,b,s,s,s,s,s", 10, 8);
+		Move move = AI.minMax(board, 6, advancedChainEvaluator);
+		Move move2 = AI.minMax(board, 7, advancedChainEvaluator);
+		Move move3 = AI.minMax(board, 8, advancedChainEvaluator);
+		assertEquals(6, move.column);
+		assertEquals(6, move2.column);
+		assertEquals(6, move3.column);
+		assertEquals(Board.BLUE, move.piece);
+		assertEquals(Board.BLUE, move2.piece);
+		assertEquals(Board.BLUE, move3.piece);
 	}
 	
 	@Test
